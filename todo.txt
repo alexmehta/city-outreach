@@ -1,3 +1,3 @@
-todo connect java data to database
-todo create php login system with tags
-todo look at other sites
+todo connect java data to database - 15 min
+todo create php login system with tags - 30 min 
+todo look at other sites - 15 min
