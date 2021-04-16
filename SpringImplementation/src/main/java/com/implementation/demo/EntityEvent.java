@@ -12,8 +12,8 @@ public class EntityEvent {
     @Id
     private int id;
     private String name;
-    private Date date;
-    private Time time;
+    private String date;
+    private String time;
     private String location;
     private String presentations;
     private String documents;
@@ -21,17 +21,6 @@ public class EntityEvent {
 
     public EntityEvent(){
 
-    }
-
-    public EntityEvent(int id, String name, Date date, Time time, String location, String presentations, String documents, String officalmin) {
-        this.id = id;
-        this.name = name;
-        this.date = date;
-        this.time = time;
-        this.location = location;
-        this.presentations = presentations;
-        this.documents = documents;
-        this.officalmin = officalmin;
     }
 
     public int getId() {
@@ -50,19 +39,19 @@ public class EntityEvent {
         this.name = name;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -95,6 +84,17 @@ public class EntityEvent {
     }
 
     public void setOfficalmin(String officalmin) {
+        this.officalmin = officalmin;
+    }
+
+    public EntityEvent(int id, String name, String date, String time, String location, String presentations, String documents, String officalmin) {
+        this.id = id;
+        this.name = name;
+        this.date = date;
+        this.time = time;
+        this.location = location;
+        this.presentations = presentations;
+        this.documents = documents;
         this.officalmin = officalmin;
     }
 }
