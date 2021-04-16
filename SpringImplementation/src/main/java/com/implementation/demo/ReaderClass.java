@@ -27,6 +27,7 @@ public class ReaderClass {
             }
             EntityEvent event = new EntityEvent();
             event.setName(string[0]);
+
             event.setDate(string[1]);
             event.setTime(string[2]);
             event.setLocation(string[3]);

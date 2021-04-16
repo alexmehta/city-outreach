@@ -85,7 +85,7 @@ public class GetExcel {
         profile.setPreference("browser.helperapps.neverAsk.saveToDisk", "application/xls");
         new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/form/div[3]/div[6]/div/div/div[6]/div[1]/div/table[3]/tbody/tr/td/div/ul/li[3]"))).click();
         new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/form/div[3]/div[6]/div/div/div[6]/div[1]/div/table[3]/tbody/tr/td/div/ul/li[3]/div/ul/li[1]/a"))).click();
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(2);
         driver.close();
         File export = new File("src/main/tmp/Export.xls");
         File newname = new File("src/main/tmp/Export.html");

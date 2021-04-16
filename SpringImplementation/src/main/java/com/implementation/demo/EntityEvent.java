@@ -1,8 +1,8 @@
 package com.implementation.demo;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
 @Entity
@@ -10,7 +10,8 @@ import java.util.Date;
 
 public class EntityEvent {
     @Id
-    private int id;
+    @GeneratedValue(strategy= GenerationType.TABLE)
+    private Integer id;
     private String name;
     private String date;
     private String time;
