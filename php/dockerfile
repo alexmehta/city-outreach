@@ -3,12 +3,3 @@ RUN apt update && apt-get upgrade -y
 RUN docker-php-ext-install mysqli
 EXPOSE 80
 
-RUN apt install openjdk-8-jre
-RUN java -version
-RUN mkdir /usr/local/java
-RUN mv jre-8u151-linux-x64.tar.gz /usr/local/java
-RUN cd /usr/local/java
-RUN tar zxvf jre-8u151-linux-x64.tar.gz
-RUN rm jre-8u151-linux-x64.tar.gz
-RUN update-alternatives --install "/usr/bin/java" "java" "/usr/local/java/jre1.8.0_151/bin/java" 1
-RUN java -version
