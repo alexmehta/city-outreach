@@ -1,0 +1,5 @@
+FROM php:8.0.3-apache-buster
+RUN apt update && apt-get upgrade -y
+RUN docker-php-ext-install mysqli
+EXPOSE 80
+COPY httpd.conf /etc/apache2/apache2.conf
