@@ -15,20 +15,22 @@ public class EntityEvent {
     private Date date;
     private Time time;
     private String location;
-    private String type;
+    private String presentations;
+    private String documents;
     private String officalmin;
 
     public EntityEvent(){
 
     }
 
-    public EntityEvent(int id, String name, Date date, Time time, String location, String type, String officalmin) {
+    public EntityEvent(int id, String name, Date date, Time time, String location, String presentations, String documents, String officalmin) {
         this.id = id;
         this.name = name;
         this.date = date;
         this.time = time;
         this.location = location;
-        this.type = type;
+        this.presentations = presentations;
+        this.documents = documents;
         this.officalmin = officalmin;
     }
 
@@ -72,12 +74,20 @@ public class EntityEvent {
         this.location = location;
     }
 
-    public String getType() {
-        return type;
+    public String getPresentations() {
+        return presentations;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setPresentations(String presentations) {
+        this.presentations = presentations;
+    }
+
+    public String getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(String documents) {
+        this.documents = documents;
     }
 
     public String getOfficalmin() {
