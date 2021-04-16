@@ -2,6 +2,7 @@ package com.implementation.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,19 +27,21 @@ public class ReaderClass {
                 printWriter.println(s1);
             }
             EntityEvent event = new EntityEvent();
-            event.setName(string[0]);
 
+
+            basicRepo.save(event);
+            event.setName(string[0]);
             event.setDate(string[1]);
             event.setTime(string[2]);
             event.setLocation(string[3]);
             event.setPresentations(string[4]);
             event.setDocuments(string[5]);
             event.setOfficalmin(string[6]);
-            basicRepo.save(event);
+            event.setId(event.getId());
             printWriter.println();
         }
-        printWriter.close();
 
+        printWriter.close();
         return st;
     }
 }

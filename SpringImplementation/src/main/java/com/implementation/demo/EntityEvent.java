@@ -10,7 +10,8 @@ import java.util.Date;
 
 public class EntityEvent {
     @Id
-    @GeneratedValue(strategy= GenerationType.TABLE)
+    @SequenceGenerator(name = "idIncrement", sequenceName = "idIncrement", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String date;
