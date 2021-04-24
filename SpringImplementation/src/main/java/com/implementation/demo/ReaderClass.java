@@ -36,7 +36,9 @@ public class ReaderClass {
                 Class.forName(driver).newInstance();
                 con = DriverManager.getConnection(url+db, user, pass);
                 Statement st = con.createStatement();
-                ResultSet res = st.executeQuery("INSERT INTO events (name,date,time,location,presentations,documents,officalmin) INTO VALUES ('%s','%s','%s','%s','%s','%s','%s')").format(string[0],string[1]);
+                String prepared = String.format("INSERT INTO events (name,date,time,location,presentations,documents,officalmin) INTO VALUES ('%s','%s','%s','%s','%s','%s','%s')", string[0],string[1],string[2],string[3],string[4],string[5],string[6]);
+                System.out.println(prepared);
+                ResultSet res = st.executeQuery(prepared);
                 System.out.println("Emp_code: " + "\t" + "Emp_name: ");
                 while (res.next()) {
                     int code = res.getInt("Emp_code");
