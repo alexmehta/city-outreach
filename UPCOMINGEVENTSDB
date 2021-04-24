@@ -1,0 +1,15 @@
+create table upcomingevents
+(
+    id int auto_increment,
+    name VARCHAR(500) null,
+    date VARCHAR(200) null,
+    time VARCHAR(3333) null,
+    location TEXT null,
+    presentations TEXT null,
+    documents TEXT null,
+    officalmin TEXT null,
+    primary key (id)
+
+)
+    comment 'upcoming events database';
+
