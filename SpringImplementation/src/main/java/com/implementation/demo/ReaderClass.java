@@ -11,8 +11,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class ReaderClass {
-    @Autowired
-    BasicRepo basicRepo;
+
     public int RW(File file) throws IOException, SQLException {
         long lines = Files.lines(file.toPath()).count();
         Scanner s = new Scanner(file);
@@ -25,7 +24,6 @@ public class ReaderClass {
                 string[i] = s1;
                 printWriter.println(s1);
             }
-
             Connection con = null;
             String url = "jdbc:mysql://localhost:6033/";
             String db = "cityofhayward";
