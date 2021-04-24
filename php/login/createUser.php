@@ -4,5 +4,5 @@
  $email = $_POST['email'];
  $password = $_POST['password'];
  $user->BasicUser($email,$password);
-
+ header("");
 ?>

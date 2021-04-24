@@ -1,0 +1,182 @@
+[24-Apr-2021 18:49:25 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/includes/includes.php:16
+Stack trace:
+#0 /var/www/html/user/User.php(7): include()
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'dsdfsa')
+#2 {main}
+  thrown in /var/www/html/includes/includes.php on line 16
+[24-Apr-2021 18:49:35 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/includes/includes.php:16
+Stack trace:
+#0 /var/www/html/user/User.php(7): include()
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'dsdfsa')
+#2 {main}
+  thrown in /var/www/html/includes/includes.php on line 16
+[24-Apr-2021 18:49:38 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/includes/includes.php:16
+Stack trace:
+#0 /var/www/html/user/User.php(7): include()
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', '34243423243')
+#2 {main}
+  thrown in /var/www/html/includes/includes.php on line 16
+[24-Apr-2021 18:50:27 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/includes/includes.php:16
+Stack trace:
+#0 /var/www/html/user/User.php(7): include()
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'dfsfafs')
+#2 {main}
+  thrown in /var/www/html/includes/includes.php on line 16
+[24-Apr-2021 18:50:59 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/includes/includes.php:16
+Stack trace:
+#0 /var/www/html/user/User.php(7): include()
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'dfsfafs')
+#2 {main}
+  thrown in /var/www/html/includes/includes.php on line 16
+[24-Apr-2021 18:51:08 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/includes/includes.php:16
+Stack trace:
+#0 /var/www/html/user/User.php(9): include()
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'dfsfafs')
+#2 {main}
+  thrown in /var/www/html/includes/includes.php on line 16
+[24-Apr-2021 18:51:10 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/includes/includes.php:16
+Stack trace:
+#0 /var/www/html/user/User.php(9): include()
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'dfsfafs')
+#2 {main}
+  thrown in /var/www/html/includes/includes.php on line 16
+[24-Apr-2021 18:52:01 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/includes/includes.php:16
+Stack trace:
+#0 /var/www/html/user/User.php(9): include()
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'dfsfafs')
+#2 {main}
+  thrown in /var/www/html/includes/includes.php on line 16
+[24-Apr-2021 18:52:28 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] No such file or directory in /var/www/html/includes/includes.php:16
+Stack trace:
+#0 /var/www/html/user/User.php(9): include()
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'dfsfafs')
+#2 {main}
+  thrown in /var/www/html/includes/includes.php on line 16
+[24-Apr-2021 18:52:53 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] No such file or directory in /var/www/html/includes/includes.php:16
+Stack trace:
+#0 /var/www/html/user/User.php(9): include()
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'dfsfafs')
+#2 {main}
+  thrown in /var/www/html/includes/includes.php on line 16
+[24-Apr-2021 18:53:33 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] No such file or directory in /var/www/html/includes/includes.php:16
+Stack trace:
+#0 /var/www/html/user/User.php(9): include()
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'fsda')
+#2 {main}
+  thrown in /var/www/html/includes/includes.php on line 16
+[24-Apr-2021 18:55:09 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cityofhayward.users' doesn't exist in /var/www/html/user/User.php:11
+Stack trace:
+#0 /var/www/html/user/User.php(11): PDO->prepare('INSERT INTO use...')
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'fsda')
+#2 {main}
+  thrown in /var/www/html/user/User.php on line 11
+[24-Apr-2021 18:56:03 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cityofhayward.users' doesn't exist in /var/www/html/user/User.php:11
+Stack trace:
+#0 /var/www/html/user/User.php(11): PDO->prepare('INSERT INTO use...')
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'fsda')
+#2 {main}
+  thrown in /var/www/html/user/User.php on line 11
+[24-Apr-2021 18:57:21 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cityofhayward.users' doesn't exist in /var/www/html/user/User.php:11
+Stack trace:
+#0 /var/www/html/user/User.php(11): PDO->prepare('INSERT INTO use...')
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'fsda')
+#2 {main}
+  thrown in /var/www/html/user/User.php on line 11
+[24-Apr-2021 18:57:24 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cityofhayward.users' doesn't exist in /var/www/html/user/User.php:11
+Stack trace:
+#0 /var/www/html/user/User.php(11): PDO->prepare('INSERT INTO use...')
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'fsda')
+#2 {main}
+  thrown in /var/www/html/user/User.php on line 11
+[24-Apr-2021 18:58:46 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cityofhayward.upcomingevents' doesn't exist in /var/www/html/user/User.php:11
+Stack trace:
+#0 /var/www/html/user/User.php(11): PDO->prepare('INSERT INTO upc...')
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'fsda')
+#2 {main}
+  thrown in /var/www/html/user/User.php on line 11
+[24-Apr-2021 19:00:08 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cityofhayward.users' doesn't exist in /var/www/html/user/User.php:11
+Stack trace:
+#0 /var/www/html/user/User.php(11): PDO->prepare('INSERT INTO use...')
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'fsda')
+#2 {main}
+  thrown in /var/www/html/user/User.php on line 11
+[24-Apr-2021 19:00:09 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cityofhayward.users' doesn't exist in /var/www/html/user/User.php:11
+Stack trace:
+#0 /var/www/html/user/User.php(11): PDO->prepare('INSERT INTO use...')
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'fsda')
+#2 {main}
+  thrown in /var/www/html/user/User.php on line 11
+[24-Apr-2021 19:01:39 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cityofhayward.users' doesn't exist in /var/www/html/user/User.php:11
+Stack trace:
+#0 /var/www/html/user/User.php(11): PDO->prepare('INSERT INTO use...')
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'fsda')
+#2 {main}
+  thrown in /var/www/html/user/User.php on line 11
+[24-Apr-2021 19:01:46 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cityofhayward.users' doesn't exist in /var/www/html/user/User.php:11
+Stack trace:
+#0 /var/www/html/user/User.php(11): PDO->prepare('INSERT INTO use...')
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'fsda')
+#2 {main}
+  thrown in /var/www/html/user/User.php on line 11
+[24-Apr-2021 19:01:47 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cityofhayward.users' doesn't exist in /var/www/html/user/User.php:11
+Stack trace:
+#0 /var/www/html/user/User.php(11): PDO->prepare('INSERT INTO use...')
+#1 /var/www/html/login/createUser.php(6): User->BasicUser('r3e@sfdadca.cas...', 'fsda')
+#2 {main}
+  thrown in /var/www/html/user/User.php on line 11
+[24-Apr-2021 19:01:49 UTC] PHP Warning:  Undefined array key "email" in /var/www/html/login/createUser.php on line 4
+[24-Apr-2021 19:01:49 UTC] PHP Warning:  Undefined array key "password" in /var/www/html/login/createUser.php on line 5
+[24-Apr-2021 19:01:49 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cityofhayward.users' doesn't exist in /var/www/html/user/User.php:11
+Stack trace:
+#0 /var/www/html/user/User.php(11): PDO->prepare('INSERT INTO use...')
+#1 /var/www/html/login/createUser.php(6): User->BasicUser(NULL, NULL)
+#2 {main}
+  thrown in /var/www/html/user/User.php on line 11
+[24-Apr-2021 19:06:00 UTC] PHP Warning:  Undefined array key "email" in /var/www/html/login/createUser.php on line 4
+[24-Apr-2021 19:06:00 UTC] PHP Warning:  Undefined array key "password" in /var/www/html/login/createUser.php on line 5
+[24-Apr-2021 19:06:00 UTC] PHP Warning:  Undefined variable $sth in /var/www/html/user/User.php on line 13
+[24-Apr-2021 19:06:00 UTC] PHP Fatal error:  Uncaught Error: Call to a member function errorInfo() on null in /var/www/html/user/User.php:13
+Stack trace:
+#0 /var/www/html/login/createUser.php(6): User->BasicUser(NULL, NULL)
+#1 {main}
+  thrown in /var/www/html/user/User.php on line 13
+[24-Apr-2021 19:06:01 UTC] PHP Warning:  Undefined array key "email" in /var/www/html/login/createUser.php on line 4
+[24-Apr-2021 19:06:01 UTC] PHP Warning:  Undefined array key "password" in /var/www/html/login/createUser.php on line 5
+[24-Apr-2021 19:06:01 UTC] PHP Warning:  Undefined variable $sth in /var/www/html/user/User.php on line 13
+[24-Apr-2021 19:06:01 UTC] PHP Fatal error:  Uncaught Error: Call to a member function errorInfo() on null in /var/www/html/user/User.php:13
+Stack trace:
+#0 /var/www/html/login/createUser.php(6): User->BasicUser(NULL, NULL)
+#1 {main}
+  thrown in /var/www/html/user/User.php on line 13
+[24-Apr-2021 19:06:01 UTC] PHP Warning:  Undefined array key "email" in /var/www/html/login/createUser.php on line 4
+[24-Apr-2021 19:06:01 UTC] PHP Warning:  Undefined array key "password" in /var/www/html/login/createUser.php on line 5
+[24-Apr-2021 19:06:01 UTC] PHP Warning:  Undefined variable $sth in /var/www/html/user/User.php on line 13
+[24-Apr-2021 19:06:01 UTC] PHP Fatal error:  Uncaught Error: Call to a member function errorInfo() on null in /var/www/html/user/User.php:13
+Stack trace:
+#0 /var/www/html/login/createUser.php(6): User->BasicUser(NULL, NULL)
+#1 {main}
+  thrown in /var/www/html/user/User.php on line 13
+[24-Apr-2021 19:06:01 UTC] PHP Warning:  Undefined array key "email" in /var/www/html/login/createUser.php on line 4
+[24-Apr-2021 19:06:01 UTC] PHP Warning:  Undefined array key "password" in /var/www/html/login/createUser.php on line 5
+[24-Apr-2021 19:06:01 UTC] PHP Warning:  Undefined variable $sth in /var/www/html/user/User.php on line 13
+[24-Apr-2021 19:06:01 UTC] PHP Fatal error:  Uncaught Error: Call to a member function errorInfo() on null in /var/www/html/user/User.php:13
+Stack trace:
+#0 /var/www/html/login/createUser.php(6): User->BasicUser(NULL, NULL)
+#1 {main}
+  thrown in /var/www/html/user/User.php on line 13
+[24-Apr-2021 19:06:02 UTC] PHP Warning:  Undefined array key "email" in /var/www/html/login/createUser.php on line 4
+[24-Apr-2021 19:06:02 UTC] PHP Warning:  Undefined array key "password" in /var/www/html/login/createUser.php on line 5
+[24-Apr-2021 19:06:02 UTC] PHP Warning:  Undefined variable $sth in /var/www/html/user/User.php on line 13
+[24-Apr-2021 19:06:02 UTC] PHP Fatal error:  Uncaught Error: Call to a member function errorInfo() on null in /var/www/html/user/User.php:13
+Stack trace:
+#0 /var/www/html/login/createUser.php(6): User->BasicUser(NULL, NULL)
+#1 {main}
+  thrown in /var/www/html/user/User.php on line 13
+[24-Apr-2021 19:06:02 UTC] PHP Warning:  Undefined array key "email" in /var/www/html/login/createUser.php on line 4
+[24-Apr-2021 19:06:02 UTC] PHP Warning:  Undefined array key "password" in /var/www/html/login/createUser.php on line 5
+[24-Apr-2021 19:06:02 UTC] PHP Warning:  Undefined variable $sth in /var/www/html/user/User.php on line 13
+[24-Apr-2021 19:06:02 UTC] PHP Fatal error:  Uncaught Error: Call to a member function errorInfo() on null in /var/www/html/user/User.php:13
+Stack trace:
+#0 /var/www/html/login/createUser.php(6): User->BasicUser(NULL, NULL)
+#1 {main}
+  thrown in /var/www/html/user/User.php on line 13

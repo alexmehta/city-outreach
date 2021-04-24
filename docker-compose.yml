@@ -22,7 +22,7 @@ services:
       MYSQL_USER: devuser
       MYSQL_PASSWORD: devpass
     ports:
-      - '6033:3306'
+      - '3306:3306'
     security_opt:
       - seccomp:unconfined
   selenium:

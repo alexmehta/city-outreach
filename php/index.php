@@ -19,5 +19,7 @@
         <input type="password" name="password">
         <input type="submit">
     </form>
+
+    <form action="login"></form>
 </body>
 </html>

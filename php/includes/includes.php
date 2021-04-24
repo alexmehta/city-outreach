@@ -1,11 +1,10 @@
 <?php
-$host = "localhost:3306";
-$superusername = "devuser";
-$superpassword = "devpass";
+$host = "127.0.0.1";
+$superusername = "root";
+$superpassword = "root";
 $database_name = "cityofhayward";
 $charset = 'utf8mb4';
-
-$dsn = "mysql:host=$host;dbname=$database_name;charset=$charset";
+$dsn = "mysql:host=mysql8;dbname=cityofhayward;port=3306";
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
