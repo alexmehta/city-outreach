@@ -38,12 +38,14 @@ public class ReaderClass {
                     System.out.println(e);
                 }
                 String url = "jdbc:mysql://localhost:3306/cityofhayward";
-                conn = (Connection) DriverManager.getConnection(url, "devuser", "devpass");
+                conn = DriverManager.getConnection(url, "devuser", "devpass");
                 System.out.println("Connection is created successfully:");
-                stmt = (Statement) conn.createStatement();
-                String query1 = "INSERT INTO upcomingevents " + "VALUES (%s,%s,%s,%s,%s,%s,%s)";
-                query1 = String.format(query1, strings.get(0),strings.get(1),strings.get(2),strings.get(3),strings.get(4),strings.get(5),strings.get(6));
+                stmt =conn.createStatement();
+                String query1 = "INSERT INTO upcomingevents (name,date,time,location,presentations,documents,officalmin) " + "VALUES ('%s','%s','%s','%s','%s','%s','%s')" + "WHERE NOT EXISTS (SELECT * FROM upcomingevents where name = '%s' AND date='%s' AND time='%s' AND location='%s' AND presentations='%s' AND documents ='%s')";
+                query1 = String.format(query1, strings.get(0),strings.get(1),strings.get(2),strings.get(3),strings.get(4),strings.get(5),strings.get(6),strings.get(0),strings.get(1),strings.get(2),strings.get(3),strings.get(4),strings.get(5),strings.get(6));
+                System.out.println(query1);
                 stmt.executeUpdate(query1);
+                conn.close();
                 System.out.println("Record is inserted in the table successfully..................");
             } catch (SQLException excep) {
                 excep.printStackTrace();
