@@ -45,6 +45,7 @@ public class ReaderClass {
                 query1 = String.format(query1, strings.get(0),strings.get(1),strings.get(2),strings.get(3),strings.get(4),strings.get(5),strings.get(6),strings.get(0),strings.get(1),strings.get(2),strings.get(3),strings.get(4),strings.get(5),strings.get(6));
                 System.out.println(query1);
                 stmt.executeUpdate(query1);
+
                 conn.close();
                 System.out.println("Record is inserted in the table successfully..................");
             } catch (SQLException excep) {
