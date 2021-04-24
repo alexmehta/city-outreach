@@ -1,13 +1,13 @@
 package com.implementation.demo;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.transaction.Transactional;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Files;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ReaderClass {
@@ -16,43 +16,52 @@ public class ReaderClass {
         long lines = Files.lines(file.toPath()).count();
         Scanner s = new Scanner(file);
         int number = (int) (lines / 7);
+        System.out.println("NUMBER:");
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+        System.out.println(number);
+        System.out.println(number * 7);
+        String host = "jdbc:sqlserver://server;databaseName=db";
+        String username = "devuser";
+        String password = "devpass";
         PrintWriter printWriter = new PrintWriter(new File("src/main/tmp/test.txt"));
         for (int i = 0; i < number; i++) {
-            String[] string = new String[7];
+            ArrayList<String> strings = new ArrayList<>();
             for (int j = 0; j < 7; j++) {
-                String s1 = s.nextLine();
-                string[i] = s1;
-                printWriter.println(s1);
+                strings.add(br.readLine());
             }
-            Connection con = null;
-            String url = "jdbc:mysql://localhost:6033/";
-            String db = "cityofhayward";
-            String driver = "com.mysql.jdbc.Driver";
-            String user = "devuser";
-            String pass = "devpass";
-            try{
-                Class.forName(driver).newInstance();
-                con = DriverManager.getConnection(url+db, user, pass);
-                Statement st = con.createStatement();
-                String prepared = String.format("INSERT INTO events (name,date,time,location,presentations,documents,officalmin) INTO VALUES ('%s','%s','%s','%s','%s','%s','%s')", string[0],string[1],string[2],string[3],string[4],string[5],string[6]);
-                System.out.println(prepared);
-                ResultSet res = st.executeQuery(prepared);
-                System.out.println("Emp_code: " + "\t" + "Emp_name: ");
-                while (res.next()) {
-                    int code = res.getInt("Emp_code");
-                    String sring = res.getString("Emp_name");
-                    System.out.println(i + "\t\t" + sring);
+            Connection conn = null;
+            Statement stmt = null;
+            try {
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+                String url = "jdbc:mysql://localhost:3306/cityofhayward";
+                conn = (Connection) DriverManager.getConnection(url, "devuser", "devpass");
+                System.out.println("Connection is created successfully:");
+                stmt = (Statement) conn.createStatement();
+                String query1 = "INSERT INTO upcomingevents " + "VALUES (%s,%s,%s,%s,%s,%s,%s)";
+                query1 = String.format(query1, strings.get(0),strings.get(1),strings.get(2),strings.get(3),strings.get(4),strings.get(5),strings.get(6));
+                stmt.executeUpdate(query1);
+                System.out.println("Record is inserted in the table successfully..................");
+            } catch (SQLException excep) {
+                excep.printStackTrace();
+            } catch (Exception excep) {
+                excep.printStackTrace();
+            } finally {
+                try {
+                    if (stmt != null)
+                        conn.close();
+                } catch (SQLException se) {}
+                try {
+                    if (conn != null)
+                        conn.close();
+                } catch (SQLException se) {
+                    se.printStackTrace();
                 }
             }
-            catch (SQLException srings){
-                System.out.println("SQL code does not execute.");
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            }
-            finally {
-                con.close();
-            }
+            System.out.println("Please check it in the MySQL Table......... ……..");
         }
 
         printWriter.close();

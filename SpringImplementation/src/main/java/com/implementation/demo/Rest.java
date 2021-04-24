@@ -10,19 +10,19 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.Reader;
+import java.sql.SQLException;
 
 @RestController
 public class Rest {
     @PostMapping("/update")
-    public int getvalues() throws IOException, InterruptedException {
+    public String getvalues() throws IOException, InterruptedException, SQLException {
         FileUtils.cleanDirectory(new File("src/main/tmp"));
         GetExcel getExcel1 = new GetExcel();
         getExcel1.DownloadXLS();
         getExcel1.readInCSVFormat(new File("src\\main\\tmp\\Export.html"));
         ReaderClass reader = new ReaderClass();
-        int f = reader.RW(new File("src\\main\\tmp\\File.txt"));
-
-        return f;
+        int f = reader.RW(new File("src/main/tmp/File.txt"));
+        return "complete";
 
     }
 }
