@@ -12,7 +12,8 @@ $options = [
 ];
 try {
     $pdo = new PDO($dsn, $superusername, $superpassword, $options);
-} catch (\PDOException $e) {
-    throw new \PDOException($e->getMessage(), (int)$e->getCode());
+}catch ( PDOException $e ) {
+    echo 'ERROR!';
+    print_r( $e );
 }
 ?>

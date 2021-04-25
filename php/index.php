@@ -19,7 +19,13 @@
         <input type="password" name="password">
         <input type="submit">
     </form>
-
-    <form action="login"></form>
+    <br>
+    <form action="login/loginUser.php" method="post">
+        <label>Email</label>
+        <input name="email" type="email" required="required">
+        <label>Password</label>
+        <input type="password" name="password">
+        <input type="submit">
+    </form>
 </body>
 </html>
