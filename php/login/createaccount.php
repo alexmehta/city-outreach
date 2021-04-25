@@ -13,6 +13,7 @@
     <input name="email" type="email">
     <label>Password</label>
     <input type="password" name="password">
+    <input type="date" name="DOB">
     <input type="submit">
 </form>
 </body>
