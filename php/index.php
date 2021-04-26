@@ -1,5 +1,8 @@
 <?php
-
+session_start();
+if (isset($_SESSION['id'])){
+    $id = $_SESSION['id'];
+}
 
 ?>
 <!doctype html>
@@ -12,8 +15,19 @@
     <title>City of Hayward Connect</title>
 </head>
 <body>
-    <a href="login/createaccount.php">Create Account</a>
+<h1>City of Hayward</h1>
+<?php
+if (!isset($id)) {
+    echo "<a href='login/createaccount.php'>Create Account</a>
     <br>
-    <a href="login/login.html">Login</a>
+    <a href= 'login / login.html'>Login</a>";
+}else{
+    echo "<a href='logout.php'>Logout</a>";
+    echo "<br>";
+    echo "<a href='settings.php'>Settings</a>";
+}
+
+?>
+
 </body>
 </html>

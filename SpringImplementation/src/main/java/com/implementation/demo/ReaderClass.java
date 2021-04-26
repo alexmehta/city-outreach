@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import de.daslaboratorium.machinelearning.classifier.bayes.BayesClassifier;
+import de.daslaboratorium.machinelearning.classifier.Classifier;
 
 public class ReaderClass {
 
@@ -23,6 +25,8 @@ public class ReaderClass {
         String host = "jdbc:sqlserver://server;databaseName=db";
         String username = "devuser";
         String password = "devpass";
+        ClassificationRunner runner = new ClassificationRunner();
+
         PrintWriter printWriter = new PrintWriter(new File("src/main/tmp/test.txt"));
         for (int i = 0; i < number; i++) {
             ArrayList<String> strings = new ArrayList<>();
@@ -41,8 +45,11 @@ public class ReaderClass {
                 conn = DriverManager.getConnection(url, "devuser", "devpass");
                 System.out.println("Connection is created successfully:");
                 stmt =conn.createStatement();
-                String query1 = "INSERT INTO upcomingevents (name,date,time,location,presentations,documents,officalmin) " + "VALUES ('%s','%s','%s','%s','%s','%s','%s')";
-                query1 = String.format(query1, strings.get(0),strings.get(1),strings.get(2),strings.get(3),strings.get(4),strings.get(5),strings.get(6),strings.get(0),strings.get(1),strings.get(2),strings.get(3),strings.get(4),strings.get(5),strings.get(6));
+                String tag = runner.tag(strings.get(0));
+                System.out.println(tag);
+                String query1 = "INSERT INTO upcomingevents (name,date,time,location,presentations,documents,officalmin,tag) " + "VALUES ('%s','%s','%s','%s','%s','%s','%s','%s')";
+
+                query1 = String.format(query1, strings.get(0),strings.get(1),strings.get(2),strings.get(3),strings.get(4),strings.get(5),strings.get(6),tag);
                 System.out.println(query1);
                 stmt.executeUpdate(query1);
 
@@ -64,7 +71,6 @@ public class ReaderClass {
                     se.printStackTrace();
                 }
             }
-            System.out.println("Please check it in the MySQL Table......... ……..");
         }
 
         printWriter.close();
