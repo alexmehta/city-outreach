@@ -41,7 +41,7 @@ public class GetExcel {
     }
 
     public void readInCSVFormat(File file) throws IOException {
-        PrintWriter fout = new PrintWriter("src/main/tmp/File.txt");
+        PrintWriter fout = new PrintWriter("src/main/tmp/info.txt");
         Document doc = Jsoup.parse(file, null);
         Element table = doc.body();
         Elements rows = table.select("tr");
