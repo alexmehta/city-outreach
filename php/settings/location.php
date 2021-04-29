@@ -12,22 +12,13 @@
 <body>
 <p>Location</p>
 
-<form>
+<form method="post" action="db/location.php">
 
     <fieldset>
         <!-- Address form -->
 
         <h2>Address</h2>
 
-        <!-- full-name input-->
-        <div class="control-group">
-            <label class="control-label">Full Name</label>
-            <div class="controls">
-                <input id="full-name" name="full-name" type="text" placeholder="full name"
-                       class="input-xlarge">
-                <p class="help-block"></p>
-            </div>
-        </div>
         <!-- address-line1 input-->
         <div class="control-group">
             <label class="control-label">Address Line 1</label>

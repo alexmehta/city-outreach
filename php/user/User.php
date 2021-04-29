@@ -9,7 +9,14 @@ class User
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$email, $password,$DOB]);
     }
+    function location($line1,$line2,$city,$state,$zip,$id){
+        ini_set('display_errors', 1);
+        include "../../includes/includes.php";
+        $sql = "UPDATE users SET address1=?,address2=?,city=?,state=?,zip=? WHERE id=?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$line1,$line2,$city,$state,$zip,$id]);
 
+    }
     function login($email, $password)
     {
         ini_set('display_errors', 1);
