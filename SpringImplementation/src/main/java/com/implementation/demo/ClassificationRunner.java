@@ -22,16 +22,21 @@ public class ClassificationRunner {
     static void add() {
         examples.add("Council Infrastructure Committee");
         correspondingtag.add("infrastructure");
+
         examples.add("Hayward Youth Commission");
         correspondingtag.add("youth");
+
         examples.add("Hayward Library Commission");
         correspondingtag.add("Library");
+
         examples.add("City Council");
         correspondingtag.add("General Meeting");
-        examples.add("Hayward Area");
 
+        examples.add("Continuation and Possible Expansion of Hayward Area Shoreline Planning Agency");
+        correspondingtag.add("infrastructure");
 
-
+        examples.add("Coronavirus");
+        correspondingtag.add("COVID-19");
 
     }
 
@@ -55,7 +60,8 @@ public class ClassificationRunner {
         bayes.setMemoryCapacity(Integer.MAX_VALUE); // remember the last 500 learned classifications
         String classification = bayes.classify(Arrays.asList(unknownText1)).getCategory();
         bayes.setMemoryCapacity(Integer.MAX_VALUE); // remember the last 500 learned classifications
-
+        System.out.println(((BayesClassifier<String, String>) bayes).classifyDetailed(
+                Arrays.asList(unknownText1)));
         return classification;
 
 
