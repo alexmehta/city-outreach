@@ -8,16 +8,23 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Location</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<p>Location</p>
 
 <form method="post" action="db/location.php">
 
     <fieldset>
         <!-- Address form -->
 
-        <h2>Address</h2>
+        <h1>Address</h1>
 
         <!-- address-line1 input-->
         <div class="control-group">
@@ -63,7 +70,7 @@
                 <p class="help-block"></p>
             </div>
         </div>
-      <label>Submit</label>  <input aria-label="submit" placeholder="submit" name="submit" value="submit" type="submit">
+    <input aria-label="submit" placeholder="submit" name="submit" value="submit" type="submit">
     </fieldset>
 
 </form>
