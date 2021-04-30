@@ -36,6 +36,14 @@ if (!isset($id)) {
 }
 
 ?>
+    <?php
+        if (isset($id)):
+
+
+
+    ?>
+
+
     <table class="table" id="upcoming-events">
         <thead>
             <tr>
@@ -56,7 +64,8 @@ if (!isset($id)) {
         while ($row = $stmt->fetch()):?>
         <tr>
            <td>
-               <?php  echo $row['name'];?>
+               <a href="event.php?id=<?php echo $row['id']?>"><?php  echo $row['name'];?></a>
+
            </td>
             <td><?php echo $row['date']?></td>
             <td>
@@ -78,5 +87,6 @@ if (!isset($id)) {
         <?php endwhile;?>
         </tbody>
     </table>
+        <?php endif; ?>
 </body>
 </html>
