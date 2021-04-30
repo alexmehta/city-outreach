@@ -1,23 +1,27 @@
 <?php
+
 class User
 {
     function BasicUser($email, $password, $DOB)
     {
         ini_set('display_errors', 1);
         include "../includes/includes.php";
-        $password = password_hash($password,PASSWORD_DEFAULT);
+        $password = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO users (email, password, DOB) values(?,?,?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$email, $password,$DOB]);
+        $stmt->execute([$email, $password, $DOB]);
     }
-    function location($line1,$line2,$city,$state,$zip,$id){
+
+    function location($line1, $line2, $city, $state, $zip, $id)
+    {
         ini_set('display_errors', 1);
         include "../../includes/includes.php";
         $sql = "UPDATE users SET address1=?,address2=?,city=?,state=?,zip=? WHERE id=?";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$line1,$line2,$city,$state,$zip,$id]);
+        $stmt->execute([$line1, $line2, $city, $state, $zip, $id]);
 
     }
+
     function login($email, $password)
     {
         ini_set('display_errors', 1);
@@ -26,10 +30,9 @@ class User
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$email]);
         $stmt = $stmt->fetch();
-        if ($stmt){
+        if ($stmt) {
             if (isset($password) && isset($email) && isset($stmt)) {
-                if (password_verify($password,$stmt['password'])) {
-                    session_start();
+                if (password_verify($password, $stmt['password'])) {
                     $id = $stmt['id'];
                     $_SESSION['id'] = $id;
                     $_SESSION['email'] = $stmt['email'];
@@ -40,6 +43,5 @@ class User
             }
         }
         header("LOCATION: ../index.php");
-
     }
 }
