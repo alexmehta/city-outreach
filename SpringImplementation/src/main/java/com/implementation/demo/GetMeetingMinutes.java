@@ -77,7 +77,7 @@ public class GetMeetingMinutes {
             conn = DriverManager.getConnection(url, "devuser", "devpass");
             System.out.println("Connection is created successfully:");
             stmt = conn.createStatement();
-            String query1 = "INSERT INTO upcoming (name,date,time,location,tag) " + "VALUES ('%s','%s','%s','%s','%s')";
+            String query1 = "INSERT INTO upcomingevents (name,date,time,location,tag) " + "VALUES ('%s','%s','%s','%s','%s')";
             query1 = String.format(query1, name, date, time, location, runner.tag(name));
             PreparedStatement ps = conn.prepareStatement(query1, Statement.RETURN_GENERATED_KEYS);
             System.out.println(query1);
@@ -116,7 +116,7 @@ public class GetMeetingMinutes {
             conn = DriverManager.getConnection(url, "devuser", "devpass");
             System.out.println("Connection is created successfully:");
             Statement statement = conn.createStatement();
-            String query = "SELECT id FROM upcoming WHERE id=(SELECT MAX(id) FROM upcoming)";
+            String query = "SELECT id FROM upcomingevents WHERE id=(SELECT MAX(id) FROM upcomingevents)";
             ResultSet resultSet = statement.executeQuery(query);
             long id = 0;
             while(resultSet.next()){
