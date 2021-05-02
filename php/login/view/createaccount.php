@@ -8,7 +8,7 @@
     <title>Sign up</title>
 </head>
 <body>
-<form action="createUser.php" method="post">
+<form action="../createUser.php" method="post">
     <label>Email</label>
     <input name="email" type="email">
     <label>Password</label>

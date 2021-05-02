@@ -26,9 +26,9 @@ if (isset($_SESSION['id'])){
 <h1>City of Hayward</h1>
 <?php
 if (!isset($id)) {
-    echo "<a href='login/createaccount.php'>Create Account</a>
+    echo "<a href='login/view/createaccount.php'>Create Account</a>
     <br>
-    <a href= 'login/login.php'>Login</a>";
+    <a href= 'login/view/login.php'>Login</a>";
 }else{
     echo "<a href='logout.php'>Logout</a>";
     echo "<br>";
