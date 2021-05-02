@@ -36,8 +36,4 @@ services:
     links:
       - selenium:hub
 
-  spring:
-    image: springci/spring-boot-ci-jdk11:2.3.x
-    ports:
-      - '1234:1234'
 
