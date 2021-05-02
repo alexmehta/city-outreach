@@ -12,17 +12,16 @@ import java.io.PrintStream;
 import java.io.Reader;
 import java.sql.SQLException;
 
+import static com.implementation.demo.GetMeetingMinutes.cleanDB;
+import static com.implementation.demo.GetMeetingMinutes.parseTable;
+
 @RestController
 public class Rest {
     @PostMapping("/update")
     public String getvalues() throws IOException, InterruptedException, SQLException {
-        FileUtils.cleanDirectory(new File("src/main/tmp"));
-        GetExcel getExcel1 = new GetExcel();
-        getExcel1.DownloadXLS();
-        getExcel1.readInCSVFormat(new File("src\\main\\tmp\\Export.html"));
-        ReaderClass reader = new ReaderClass();
-        int f = reader.RW(new File("src/main/tmp/File.txt"));
-        return "complete";
-
+        cleanDB();
+        System.out.println("Cleaned DB");
+        parseTable(8);
+        return "Complete";
     }
 }
