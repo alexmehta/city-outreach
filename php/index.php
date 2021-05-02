@@ -30,7 +30,9 @@ if (!isset($id)) {
     <br>
     <a href= 'login/view/login.php'>Login</a>";
 }else{
-    echo "<a href='logout.php'>Logout</a>";
+    echo "<a href='tags/tags.php'>Tags</a>";
+    echo "<br>";
+    echo "<a href='login/logout.php'>Logout</a>";
     echo "<br>";
     echo "<a href='settings.php'>Settings</a>";
 }
