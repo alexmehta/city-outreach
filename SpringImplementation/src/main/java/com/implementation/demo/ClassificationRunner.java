@@ -20,24 +20,27 @@ public class ClassificationRunner {
     }
 
     static void add() {
-        examples.add("Council Infrastructure Committee");
-        correspondingtag.add("infrastructure");
+        String[] example = new String[]{
+                "Council Infrastructure Committee",
+                "Hayward Youth Commission", "Hayward Library Commission",
+                "City Council",
+                "Continuation and Possible Expansion of Hayward Area Shoreline Planning Agency",
+                "Coronavirus"
 
-        examples.add("Hayward Youth Commission");
-        correspondingtag.add("youth");
 
-        examples.add("Hayward Library Commission");
-        correspondingtag.add("Library");
+        };
+        String[] tags = new String[]{
+                "infrastructure",
+                "youth", "Library",
+                "General Meeting",
+                "Environment",
+                "Covid-19"
+        };
 
-        examples.add("City Council");
-        correspondingtag.add("General Meeting");
-
-        examples.add("Continuation and Possible Expansion of Hayward Area Shoreline Planning Agency");
-        correspondingtag.add("infrastructure");
-
-        examples.add("Coronavirus");
-        correspondingtag.add("COVID-19");
-
+        for (int i = 0; i < (tags.length + example.length) / 2; i++) {
+            examples.add(example[i]);
+            correspondingtag.add(tags[i].toLowerCase());
+        }
     }
 
     public String tag(String tag) {
