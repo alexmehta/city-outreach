@@ -35,8 +35,10 @@ class User
                 if (password_verify($password, $stmt['password'])) {
                     $id = $stmt['id'];
                     $_SESSION['id'] = $id;
+                    $_SESSION['view'] = $stmt['view'];
                     $_SESSION['email'] = $stmt['email'];
                     $_SESSION['loged'] = true;
+                    $_COOKIE['view'] = $stmt['view'];
                     $_COOKIE['last_login'] = date("Y/m/d");
 
                 }

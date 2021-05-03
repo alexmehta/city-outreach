@@ -1,12 +1,15 @@
 <?php
 ini_set('display_errors', 0);
+session_start();
+#todo fix null
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=0.5">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tags</title>
 </head>
@@ -20,9 +23,9 @@ ini_set('display_errors', 0);
     while ($row = $stmt->fetch()):?>
 
     <?php
-        $sql = "SELECT * FROM following where tag = ?";
+        $sql = "SELECT * FROM following where tag = ? and userid = ?";
         $sql  = $pdo->prepare($sql);
-        $sql->execute([$row['id']]);
+        $sql->execute([$row['id'], $_SESSION['id']]);
         $sql = $sql->fetch();
         if (!$sql){
             $var = "follow";

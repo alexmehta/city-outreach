@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 ?>
 
 <!doctype html>
@@ -11,11 +13,20 @@
     <title>Settings</title>
 </head>
 <body>
-    <h2>Settings</h2>
-    <a href="settings/location.php">Change location</a>
-    <br>
-    <a href="settings/key_issues.php">Key Issues</a>
-    <br>
-    <a href="settings/notifications.php">Notifications</a>
+<h2>Settings</h2>
+<a href="settings/location.php">Change location</a>
+<br>
+<a href="settings/key_issues.php">Key Issues</a>
+<br>
+<a href="settings/notifications.php">Notifications</a>
+<?php
+if ($_SESSION['view']) {
+    echo "<a href='settings/db/view.php?answer=all'>Show all events</a>";
+
+} else {
+    echo "<a href='settings/db/view.php?answer=key'>Show only key events</a>";
+}
+
+?>
 </body>
 </html>
