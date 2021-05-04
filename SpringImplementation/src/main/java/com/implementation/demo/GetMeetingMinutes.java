@@ -248,6 +248,9 @@ public class GetMeetingMinutes {
         ClassificationRunner runner = new ClassificationRunner();
         Connection conn = null;
         Statement stmt = null;
+        if (time.equals("")){
+            time="Time not set yet.";
+        }
         try {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -307,7 +310,7 @@ public class GetMeetingMinutes {
                     System.out.println(url);
                     if (atag.attr("href").equals("") || !atag.attr("href").startsWith("MeetingDetail")) {
                         //  System.out.println("no adj, defaulting to inserting regularly");
-                        insertEventNOTNULL(name, date, time, location);
+                        insertEventNOTNULL(columns.get(0).text(), columns.get(1).text(), columns.get(3).text(), columns.get(4).text());
                     } else {
                         click(atag.attr("href"));
 
@@ -324,6 +327,7 @@ public class GetMeetingMinutes {
         for (Element row : rows) {
             Elements columns = row.select("td");
             for (int j = 0; j < columns.size(); j++) {
+                System.out.println(j);
                 System.out.println(columns.get(j).text());
             }
         }
