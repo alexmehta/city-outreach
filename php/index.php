@@ -39,6 +39,7 @@ if (!isset($id)) {
     echo "<a href='login/logout.php'>Logout</a>";
     echo "<br>";
     echo "<a href='settings.php'>Settings</a>";
+    test
 }
 
 ?>
