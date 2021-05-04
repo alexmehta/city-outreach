@@ -22,6 +22,7 @@ public class Rest {
         cleanDB();
         System.out.println("Cleaned DB");
         parseTable(8);
+        FileUtils.cleanDirectory(new File("src/main/tmp"));
         return "Complete";
     }
 }

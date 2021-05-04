@@ -23,6 +23,10 @@ if (isset($_SESSION['id'])){
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+
+
+
+
 <h1>City of Hayward</h1>
 <?php
 if (!isset($id)) {

@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class GetMeetingMinutes {
             PreparedStatement ps = conn.prepareStatement(query1, Statement.RETURN_GENERATED_KEYS);
             System.out.println(query1);
             ps.executeUpdate();
-            query1 = "TRUNCATE  TABLE upcomingevents";
+            query1 = "TRUNCATE TABLE upcomingevents";
             stmt = conn.createStatement();
             stmt.executeUpdate(query1);
         } catch (Exception excep) {
@@ -88,7 +89,6 @@ public class GetMeetingMinutes {
         String downloadFilepath = "C:\\Users\\alex\\Documents\\Programming\\pilotcity-first\\java\\src\\main\\tmp";
         profile.setPreference("browser.download.dir", downloadFilepath);
         profile.setPreference("browser.helperapps.neverAsk.saveToDisk", "application/xls");
-        FileUtils.cleanDirectory(new File("src/main/tmp"));
         new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ctl00_ContentPlaceHolder1_menuMain\"]/ul/li[2]/a"))).click();
         new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ctl00_ContentPlaceHolder1_menuMain\"]/ul/li[2]/div/ul/li[2]/a"))).click();
 
@@ -97,12 +97,12 @@ public class GetMeetingMinutes {
         new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ctl00_ContentPlaceHolder1_menuMain\"]/ul/li[3]/div/ul/li[1]/a"))).click();
         TimeUnit.SECONDS.sleep(2);
         driver.close();
-        File export = new File("src/main/tmp/Export.xls");
-        File newname = new File("src/main/tmp/info.html");
-        if (export.renameTo(newname)) {
-            System.out.println("renamed");
-        } else {
-            System.out.println("error");
+        File source = new File("src/main/tmp/Export.xls");
+        File target = new File("src/main/tmp/info.html");
+        try {
+            Files.move(source.toPath(),target.toPath());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -167,7 +167,6 @@ public class GetMeetingMinutes {
             String query1 = "INSERT INTO meetingminutes (name,tag,event) " + "VALUES ('%s','%s','%s')";
             stmt = conn.createStatement();
             FileUtils.cleanDirectory(new File("src/main/tmp"));
-
             query1 = String.format(query1, name, tag, id);
             System.out.println(query1);
             stmt.executeUpdate(query1);
@@ -285,11 +284,10 @@ public class GetMeetingMinutes {
         Document doc = Jsoup.connect("https://hayward.legistar.com/Calendar.aspx").get();
         Element table = doc.getElementById("ctl00_ContentPlaceHolder1_gridCalendar_ctl00");
         Elements rows = table.select("tr");
-        Elements header = table.select("th");
-        Elements ths = rows.select("td");
         for (int i = 0; i < rows.size(); i++) {
             Element row = rows.get(i);
             Elements columns = row.select("td");
+
             String name = null;
             String date = null;
             String time = null;
@@ -297,16 +295,16 @@ public class GetMeetingMinutes {
             for (int j = 0; j < columns.size(); j++) {
                 if (j == 0) name = columns.get(j).text();
                 if (j == 1) date = columns.get(j).text();
-                if (i == 3) time = columns.get(j).text();
+                if (i == 2) time = columns.get(j).text();
                 if (i == 4) location = columns.get(j).text();
                 if (j == 5) {
                     //get link and then send to webdrivwer
-                    System.out.println(date);
+                    System.out.println(time);
 
                     Element atag = columns.get(j).select("a").first();
-                    //System.out.println(atag.attr("href"));
+                    System.out.println(atag.attr("href"));
                     String url = atag.attr("href");
-                    //System.out.println(url);
+                    System.out.println(url);
                     if (atag.attr("href").equals("") || !atag.attr("href").startsWith("MeetingDetail")) {
                         //  System.out.println("no adj, defaulting to inserting regularly");
                         insertEventNOTNULL(name, date, time, location);
@@ -315,10 +313,23 @@ public class GetMeetingMinutes {
 
                     }
                     System.out.println();
-
                 }
 
             }
         }
+
+        for (int i = 0; i < 100; i++) {
+            System.out.println();
+        }
+        for (Element row : rows) {
+            Elements columns = row.select("td");
+            for (int j = 0; j < columns.size(); j++) {
+                System.out.println(columns.get(j).text());
+            }
+        }
+
+
+
+
     }
 }
