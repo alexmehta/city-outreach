@@ -9,6 +9,7 @@ create table if not exists users
 	city varchar(500) null,
 	state varchar(50) null,
 	zip int null,
+	view tinyint(1) default 0 null,
 	constraint users_email_uindex
 		unique (email),
 	constraint users_id_uindex

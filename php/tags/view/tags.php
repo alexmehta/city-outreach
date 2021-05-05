@@ -1,7 +1,6 @@
 <?php
 ini_set('display_errors', 0);
 session_start();
-#todo fix null
 ?>
 
 <!doctype html>
@@ -18,6 +17,13 @@ session_start();
 <ul>
     <?php
     include "../../includes/includes.php";
+
+    if (isset($_GET['newuser'])){
+        echo "<h2>Add your intrests by following tags </h2>";
+        include "../../user/User.php";
+        $user = new User();
+        $user->changeDefaults($_SESSION['id']);
+    }
 
     $stmt = $pdo->query("SELECT * FROM listtags");
     while ($row = $stmt->fetch()):?>
