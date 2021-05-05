@@ -8,6 +8,4 @@ if ($answer == "key") {
     $_SESSION['view'] = false;
 }
 header("LOCATION: ../../index.php");
-
-
 ?>
