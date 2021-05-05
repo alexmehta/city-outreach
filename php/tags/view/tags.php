@@ -13,9 +13,7 @@ session_start();
     <title>Tags</title>
 </head>
 <body>
-
 <h1>Tags</h1>
-<a href="../../index.php">Go back to home</a>
 <ul>
     <?php
     include "../../includes/includes.php";
@@ -26,7 +24,7 @@ session_start();
         $user = new User();
         $user->changeDefaults($_SESSION['id']);
     }
-
+    echo '<a href="../../index.php">Go back to home</a>';
     $stmt = $pdo->query("SELECT * FROM listtags");
     while ($row = $stmt->fetch()):?>
 
