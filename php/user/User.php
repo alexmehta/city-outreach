@@ -21,7 +21,25 @@ class User
         $stmt->execute([$line1, $line2, $city, $state, $zip, $id]);
 
     }
-
+    function changeDefaults($id){
+        ini_set('display_errors', 1);
+        include "../../includes/includes.php";
+        $sql = "UPDATE users SET view = true WHERE id=?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            $id
+        ]);
+    }
+    function getDefaults($id){
+        ini_set('display_errors', 1);
+        include "includes/includes.php";
+        $sql = "SELECT view FROM users WHERE id=? LIMIT 1";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            $id
+        ]);
+        return $stmt->fetch();
+    }
     function login($email, $password)
     {
         ini_set('display_errors', 1);
