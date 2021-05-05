@@ -3,7 +3,6 @@ session_start();
 if (isset($_SESSION['id'])){
     $id = $_SESSION['id'];
 }
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -50,9 +49,6 @@ if (isset($_SESSION['id'])){
         include "upcoming/defaultview.php";
     }
 }
-
-
-
 ?>
 </body>
 </html>
