@@ -13,12 +13,14 @@ session_start();
     <title>Tags</title>
 </head>
 <body>
+
 <h1>Tags</h1>
+<a href="../../index.php">Go back to home</a>
 <ul>
     <?php
     include "../../includes/includes.php";
 
-    if (isset($_GET['newuser'])){
+    if (isset($_GET['newuser'])&&isset($_SESSION['id'])){
         echo "<h2>Add your intrests by following tags </h2>";
         include "../../user/User.php";
         $user = new User();
