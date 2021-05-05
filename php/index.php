@@ -34,9 +34,8 @@ if (!isset($id)) {
 }else{
     include "user/User.php";
     $user = new User();
-    if ($user->getDefaults($_SESSION['id'])){
+    if (!$user->getDefaults($_SESSION['id'])){
         header("LOCATION: tags/tags.php?newuser=true");
-
     }else{
         echo "<a href='tags/tags.php'>Tags</a>";
         echo "<br>";

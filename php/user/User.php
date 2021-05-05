@@ -26,9 +26,8 @@ class User
         include "../../includes/includes.php";
         $sql = "UPDATE users SET view = true WHERE id=?";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([
-            $id
-        ]);
+        $stmt->execute([$id]);
+
     }
     function getDefaults($id){
         ini_set('display_errors', 1);
@@ -38,7 +37,8 @@ class User
         $stmt->execute([
             $id
         ]);
-        return $stmt->fetch();
+        $stmt = $stmt->fetch();
+        return $stmt['view'];
     }
     function login($email, $password)
     {
