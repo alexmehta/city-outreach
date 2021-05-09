@@ -24,6 +24,11 @@ if (isset($id)):
         ini_set('display_errors', 1);
         $stmt = $pdo->query("SELECT * FROM upcomingevents");
         while ($row = $stmt->fetch()):?>
+            <?php
+            $dt = new DateTime("now", new DateTimeZone('America/Phoenix'));
+            $time = strtotime($row['date']);
+            if ($time > strtotime($dt->format("m/d/Y, H:i:s"))):
+                ?>
             <tr>
                 <td>
                     <a href="event.php?id=<?php echo $row['id']?>"><?php  echo $row['name'];?></a>
@@ -61,6 +66,7 @@ if (isset($id)):
                     ?>
                 </td>
             </tr>
+            <?php endif?>
         <?php endwhile;?>
         </tbody>
     </table>

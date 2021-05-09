@@ -54,20 +54,19 @@ include "includes/language/language.php";
                     } else {
 
                         echo '<li class="nav-item">
-          <a class="nav-link" href="tags/tags.php">Event Types</a>
+          <a class="nav-link" href="tags/tags.php">Events</a>
         </li>';
-                        echo '<li class="nav-item">
-          <a class="nav-link" href="login/logout.php">Logout</a>
-        </li>';
+
                         echo '<li class="nav-item">
           <a class="nav-link" href="notifications/notifications.php">Notifications</a>
         </li>';
                         echo '<li class="nav-item">
           <a class="nav-link" href="settings.php">Settings</a>
         </li>';
-
+                        echo '<li class="nav-item">
+          <a class="nav-link" href="login/logout.php">Logout</a>
+        </li>';
                     }
-
                 }
                 ?>
             </ul>

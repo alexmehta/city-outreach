@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 
 ?>
 
@@ -17,5 +18,9 @@
         Upcoming Events
     </h1>
     <p>Here are some upcoming events related to your interests</p>
+    <?php
+        include "../following.php";
+    ?>
+
 </body>
 </html>
