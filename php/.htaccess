@@ -14,4 +14,10 @@ RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteRule ^tags(/.*)?$ controller/view$1
 
+
+
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteRule ^notifications(/.*)?$ notifications/view$1
+
 </IfModule>

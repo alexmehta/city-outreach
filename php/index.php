@@ -1,9 +1,10 @@
 <?php
 ob_start();
 session_start();
-if (isset($_SESSION['id'])){
+if (isset($_SESSION['id'])) {
     $id = $_SESSION['id'];
 }
+include "includes/language/language.php";
 ?>
 <!doctype html>
 <html lang="en">
@@ -14,46 +15,79 @@ if (isset($_SESSION['id'])){
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>City of Hayward Connect</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 </head>
 <body>
 
-<h1>City of Hayward</h1>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+        crossorigin="anonymous"></script>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="resources/city-of-hayward-squarelogo-1465473393255.png"
+                                              style="height: 50px; width: 50px" alt="city of hayward logo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                </li>
+                <?php
+                if (!isset($id)) {
+                    echo '<li class="nav-item">
+          <a class="nav-link" href="login/view/createaccount.php">Create Account</a>
+        </li>';
+                    echo '<li class="nav-item">
+          <a class="nav-link" href="login/view/login.php">Login</a>
+        </li>';
+
+                } else {
+                    include "user/User.php";
+                    $user = new User();
+                    if (!$user->getDefaults($_SESSION['id'])) {
+                        header("LOCATION: tags/tags.php?newuser=true");
+                    } else {
+
+                        echo '<li class="nav-item">
+          <a class="nav-link" href="tags/tags.php">Event Types</a>
+        </li>';
+                        echo '<li class="nav-item">
+          <a class="nav-link" href="login/logout.php">Logout</a>
+        </li>';
+                        echo '<li class="nav-item">
+          <a class="nav-link" href="notifications/notifications.php">Notifications</a>
+        </li>';
+                        echo '<li class="nav-item">
+          <a class="nav-link" href="settings.php">Settings</a>
+        </li>';
+
+                    }
+
+                }
+                ?>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+
 <?php
-if (!isset($id)) {
 
-    echo "<a href='login/view/createaccount.php'>Create Account</a>
-    <br>
-    <a href= 'login/view/login.php'>Login</a>";
-}else{
-    include "user/User.php";
-    $user = new User();
-    if (!$user->getDefaults($_SESSION['id'])){
-        header("LOCATION: tags/tags.php?newuser=true");
-    }else{
-        echo "<a href='tags/tags.php'>Tags</a>";
-        echo "<br>";
-        echo "<a href='login/logout.php'>Logout</a>";
-        echo "<br>";
-        echo "<a href='settings.php'>Settings</a>";
-    }
-
-}
-
-
-if (isset($_SESSION['id'])){
-    if ($_SESSION['view']){
+if (isset($_SESSION['id'])) {
+    if ($_SESSION['view']) {
         include "upcoming/following.php";
-    }else{
+    } else {
         include "upcoming/defaultview.php";
     }
 }
+
 ?>
+
 </body>
 </html>
