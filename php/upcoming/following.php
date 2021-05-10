@@ -26,6 +26,9 @@ if (isset($id)):
         $stmt = $pdo->prepare($stmt);
         $stmt->execute([$_SESSION['id']]);
         //fetches all user intrest roles
+        if ($stmt->rowCount()==0){
+            echo "Check to see if you have no interests listed";
+        }
         while ($row = $stmt->fetch()):?>
             <?php
             //checks if it is upcoming based on unix time (converts first from sql string)
@@ -56,8 +59,29 @@ if (isset($id)):
 
                         <?php endwhile; ?>
                     </td>
+                    <?php
+                        include_once "notifications/Notifications.php";
+                        $notification = new Notifications();
+                        if ($notification->getNotification($row['id'],$_SESSION['id'])==0):
+
+
+                    ?>
                     <td><a href="../notifications/view/addReminder.php?id=<?php echo $row['id']; ?>">Follow</a></td>
-                </tr>
+                    <?php endif;
+
+                    ?>
+
+                    <?php
+                if ($notification->getNotification($row['id'],$_SESSION['id'])!=0):
+
+
+                ?>
+
+                    <td><a href="../notifications/removeReminder.php?id=<?php echo $row['id']; ?>">Unfollow</a></td>
+
+
+                <? endif;?>
+                            </tr>
             <?php endif ?>
         <?php endwhile; ?>
         </tbody>
