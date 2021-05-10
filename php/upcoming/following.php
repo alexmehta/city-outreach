@@ -2,7 +2,6 @@
 if (isset($id)):
 
 
-
     ?>
 
 
@@ -26,38 +25,41 @@ if (isset($id)):
         $stmt = ("SELECT * FROM upcomingevents WHERE tag in (SELECT tags FROM listtags WHERE listtags.id in (SELECT tag from following WHERE userid=?))");
         $stmt = $pdo->prepare($stmt);
         $stmt->execute([$_SESSION['id']]);
+        //fetches all user intrest roles
         while ($row = $stmt->fetch()):?>
             <?php
+            //checks if it is upcoming based on unix time (converts first from sql string)
+
             $dt = new DateTime("now", new DateTimeZone('America/Phoenix'));
             $time = strtotime($row['date']);
             if ($time > strtotime($dt->format("m/d/Y, H:i:s"))):
                 ?>
-            <tr>
-                <td>
-                    <a href="event.php?id=<?php echo $row['id']?>"><?php  echo $row['name'];?></a>
+                <tr>
+                    <td>
+                        <a href="event.php?id=<?php echo $row['id'] ?>"><?php echo $row['name']; ?></a>
 
-                </td>
-                <td><?php echo $row['date']?></td>
-                <td>
-                    <?php echo $row['time'];?>
-                </td>
-                <td><?php echo $row['tag']?></td>
-                <td>
-                    <?php
-                    $sql = "SELECT * FROM meetingminutes WHERE event=?";
-                    $stmt2=$pdo->prepare($sql);
-                    $stmt2->execute([$row['id']]);
+                    </td>
+                    <td><?php echo $row['date'] ?></td>
+                    <td>
+                        <?php echo $row['time']; ?>
+                    </td>
+                    <td><?php echo $row['tag'] ?></td>
+                    <td>
+                        <?php
+                        $sql = "SELECT * FROM meetingminutes WHERE event=?";
+                        $stmt2 = $pdo->prepare($sql);
+                        $stmt2->execute([$row['id']]);
 
-                    while ($row2 = $stmt2->fetch()):?>
+                        while ($row2 = $stmt2->fetch()):?>
 
-                        <?php echo $row2['tag'] . " ";?>
+                            <?php echo $row2['tag'] . " "; ?>
 
-                    <?php endwhile;?>
-                </td>
-                <td><a href="../notifications/view/addReminder.php?id=<?php echo $row['id'];?>">Follow</a></td>
-            </tr>
-            <?php endif?>
-        <?php endwhile;?>
+                        <?php endwhile; ?>
+                    </td>
+                    <td><a href="../notifications/view/addReminder.php?id=<?php echo $row['id']; ?>">Follow</a></td>
+                </tr>
+            <?php endif ?>
+        <?php endwhile; ?>
         </tbody>
     </table>
 <?php endif;
