@@ -20,6 +20,7 @@ if (isset($id)):
             <th>Time</th>
             <th>main tag</th>
             <th>Other events in meeting</th>
+            <th>Follow Event</th>
         </tr>
         </thead>
         <tbody>
@@ -56,6 +57,7 @@ if (isset($id)):
 
                     <?php endwhile;?>
                 </td>
+                <td><a href="../notifications/view/addReminder.php?id=<?php echo $row['id'];?>">Follow</a></td>
             </tr>
             <?php endif?>
         <?php endwhile;?>
