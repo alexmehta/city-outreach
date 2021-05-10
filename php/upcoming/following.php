@@ -1,8 +1,4 @@
 <?php
-
-
-?>
-<?php
 if (isset($id)):
 
 
@@ -64,4 +60,7 @@ if (isset($id)):
         <?php endwhile;?>
         </tbody>
     </table>
-<?php endif; ?>
+<?php endif;
+
+
+?>
