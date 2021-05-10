@@ -53,6 +53,7 @@ if (isset($id)):
                     $stmt2->execute([$row['id']]);
 
                     while ($row2 = $stmt2->fetch()):?>
+
                         <?php echo $row2['tag'] . " ";?>
 
                     <?php endwhile;?>
