@@ -2,7 +2,7 @@ create table if not exists upcomingevents
 (
 	id int auto_increment
 		primary key,
-	name varchar(500) null,
+	name varchar(1000) null,
 	date varchar(200) null,
 	time varchar(3333) null,
 	location text null,

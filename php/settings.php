@@ -14,11 +14,11 @@ session_start();
 </head>
 <body>
 <h2>Settings</h2>
-<a href="settings/location.php">Change location</a>
+<a href="settings/view/location.php">Change location</a>
 <br>
-<a href="settings/key_issues.php">Key Issues</a>
+<a href="settings/view/key_issues.php">Key Issues</a>
 <br>
-<a href="settings/notifications.php">Notifications</a>
+<a href="settings/view/notifications.php">Notifications</a>
 <?php
 if ($_SESSION['view']) {
     echo "<a href='settings/db/view.php?answer=all'>Show all events</a>";
