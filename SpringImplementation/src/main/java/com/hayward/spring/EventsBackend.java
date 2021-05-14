@@ -10,21 +10,22 @@ import org.springframework.scheduling.annotation.Scheduled;
 @SpringBootApplication
 @AllArgsConstructor
 
-public class SeliniumHaywardApplication {
+public class EventsBackend {
     private final GetNotifications getNotifications;
     public static void main(String[] args) {
-        SpringApplication.run(SeliniumHaywardApplication.class, args);
+        SpringApplication.run(EventsBackend.class, args);
     }
 
     //0 0 0 * * * should be actual time
     @Scheduled(fixedRate = 900 * 1000)
     void sendEmails(){
     }
-    @Scheduled(fixedRate = 900*1000)
+    @Scheduled(fixedRate = 5*1000)
     void test(){
         getNotifications.getEvents();
     }
     @EnableScheduling
     class SchedulingConfiguration{
+
     }
 }

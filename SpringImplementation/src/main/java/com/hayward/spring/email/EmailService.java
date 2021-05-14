@@ -1,6 +1,7 @@
 package com.hayward.spring.email;
 
 import lombok.AllArgsConstructor;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 
 @Service
@@ -21,12 +24,15 @@ public class EmailService implements EmailSender {
 
     @Override
     @Async
-    public void send(String to, String subject) throws MessagingException {
+    public void send(String to, String subject, String event, String date) throws MessagingException, IOException {
         System.out.println("trying");
         MimeMessage message = mailSender.createMimeMessage();
+
         MimeMessageHelper helper = new MimeMessageHelper(message, "utf-8");
         helper.setSubject(subject);
-        helper.setText("This was an automated message letting you know that an event you signed up for is happening soon");
+        String mess  = FileUtils.readFileToString(new File("src/main/resources/message.html"));
+        helper.setText(String.format(mess, event,date),true);
+
         helper.setTo(to);
         helper.setFrom("cyberorangelord17@gmail.com");
         mailSender.send(message);

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
+import java.io.IOException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -119,10 +120,10 @@ public class GetNotifications {
         return "Not Found";
     }
 
-    public void SendEmail(int event, String email, int id) throws MessagingException, SQLException {
+    public void SendEmail(int event, String email, int id) throws MessagingException, SQLException, IOException {
         String reminder = String.format("Reminder that %s is happening on %s", getEventName(event), getEventDate(event));
         String to = email;
-        emailSender.send(to, reminder);
+        emailSender.send(to, reminder,getEventName(event),getEventDate(event));
 
         Connection conn = null;
         Statement stmt = null;
