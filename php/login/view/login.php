@@ -1,5 +1,8 @@
 <?php
 include "../../includes/csrf.php";
+if (isset($_GET['redirect'])){
+    $redirect = $_GET['redirect'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +62,13 @@ include "../../includes/csrf.php";
         </div>
     </div>
 </nav>
-<form action="../loginUser.php" method="post">
+<form action="loginUser.php" method="post">
+    <input type="hidden" name="redirect" value="<?php
+        if (isset($redirect)){
+            echo $redirect;
+    }else{
+            echo "none";
+        } ?>">
     <input type="hidden" name="token" value="<?php echo $_SESSION['token']?>">
     <div class="mb-3">
         <label class="form-label" for="email">Email</label>

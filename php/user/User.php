@@ -40,7 +40,7 @@ class User
         $stmt = $stmt->fetch();
         return $stmt['view'];
     }
-    function login($email, $password)
+    function login($email, $password,$redirect)
     {
         ini_set('display_errors', 1);
         include "../includes/includes.php";
@@ -62,6 +62,10 @@ class User
                 }
             }
         }
-        header("LOCATION: ../index.php");
+        if ($redirect!="none"){
+            header("LOCATION: .." . $redirect);
+       }else{
+            header("LOCATION: ../index.php");
+    }
     }
 }
