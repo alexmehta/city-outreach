@@ -33,9 +33,22 @@ if (isset($id)):
             <?php
             //checks if it is upcoming based on unix time (converts first from sql string)
 
-            $dt = new DateTime("now", new DateTimeZone('America/Phoenix'));
-            $time = strtotime($row['date']);
-            if ($time > strtotime($dt->format("m/d/Y, H:i:s"))):
+            $dtime = DateTime::createFromFormat("m/d/Y h:i A", $row['date'] . " " . $row['time']);
+
+            try {
+                $dt = new DateTime("now", new DateTimeZone('America/Phoenix'));
+            } catch (Exception $e) {
+                echo $e;
+            }
+            if ($row['name']=="Council Sustainability Committee"){
+                echo $dt->getTimestamp();
+                echo "<br>";
+                echo $dtime->getTimestamp();
+            }
+
+
+            if ($dtime->getTimestamp() > $dt->getTimestamp()):
+
                 ?>
                 <tr>
                     <td>
