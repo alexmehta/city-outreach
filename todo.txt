@@ -1,6 +1,0 @@
--create coucilmember view
--styling (make it easy to use)
-	-accessibilty 
--add more classifications
--admin view
--create account intrests page (restyle and ask when account is newly created)
