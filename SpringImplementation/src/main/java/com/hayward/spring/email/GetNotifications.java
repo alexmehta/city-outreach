@@ -57,9 +57,6 @@ public class GetNotifications {
 
         return false;
     }
-
-    //public String getUsername(int event){
-
     public static String getEventDate(int id) {
 
         Connection conn = null;
@@ -90,7 +87,6 @@ public class GetNotifications {
         return "Not Found";
 
     }
-
     public static String getEventName(int id) {
         Connection conn = null;
         Statement stmt = null;
@@ -119,7 +115,6 @@ public class GetNotifications {
         }
         return "Not Found";
     }
-
     public void SendEmail(int event, String email, int id) throws MessagingException, SQLException, IOException {
         String reminder = String.format("Reminder that %s is happening on %s", getEventName(event), getEventDate(event));
         String to = email;
