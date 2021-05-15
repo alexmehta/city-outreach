@@ -49,13 +49,13 @@ public class EventsBackend {
                 se.printStackTrace();
             }
         }
-
     }
-    @Scheduled(fixedRate =1800*1000 )
-    void checkupdates(){
+
+    @Scheduled(fixedRate = 1800 * 1000)
+    void checkupdates() {
         getNotifications.getEvents();
-
     }
+
     @Scheduled(fixedRate = 5 * 1000)
     void test() {
         Connection conn = null;
