@@ -62,7 +62,7 @@ if (isset($_GET['redirect'])){
         </div>
     </div>
 </nav>
-<form action="loginUser.php" method="post">
+<form action="../loginUser.php" method="post">
     <input type="hidden" name="redirect" value="<?php
         if (isset($redirect)){
             echo $redirect;

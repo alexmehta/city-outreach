@@ -1,12 +1,22 @@
-create table if not exists following
+create table if not exists users
 (
 	id int auto_increment,
-	userid int not null,
-	tag varchar(500) null,
-	constraint following_id_uindex
+	email varchar(500) null,
+	password varchar(255) not null,
+	dob datetime null,
+	address1 text null,
+	address2 text null,
+	city varchar(500) null,
+	state varchar(50) null,
+	zip int null,
+	view tinyint(1) default 0 null,
+	name text null,
+	constraint users_email_uindex
+		unique (email),
+	constraint users_id_uindex
 		unique (id)
 );
 
-alter table following
+alter table users
 	add primary key (id);
 

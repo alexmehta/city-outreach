@@ -63,14 +63,28 @@ if (isset($id)):
                     <td>
                         <?php
                         $sql = "SELECT * FROM meetingminutes WHERE event=?";
-                        $stmt2 = $pdo->prepare($sql);
+                        $stmt2=$pdo->prepare($sql);
                         $stmt2->execute([$row['id']]);
+                        $s = [];
+                        $index = 0;
+
 
                         while ($row2 = $stmt2->fetch()):?>
+                            <?php
+                            $s[$index] = $row2['tag'];
+                            $index++;
+                            ?>
 
-                            <?php echo $row2['tag'] . " "; ?>
+                        <?php endwhile;?>
+                        <?php
+                        foreach ($s as $item){
+                            if (!array_key_exists($item, $s)){
+                                echo $item . " ";
+                                $s[$item] = true;
+                            }
+                        }
 
-                        <?php endwhile; ?>
+                        ?>
                     </td>
                     <?php
                         include_once "notifications/Notifications.php";

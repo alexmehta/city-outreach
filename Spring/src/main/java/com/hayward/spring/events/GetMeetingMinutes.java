@@ -1,6 +1,6 @@
 package com.hayward.spring.events;
 //todo insert links
-import com.hayward.spring.events.ClassificationRunner;
+
 import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,7 +14,8 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.*;
 import java.text.DateFormat;
@@ -94,21 +95,30 @@ public class GetMeetingMinutes {
         String downloadFilepath = "C:\\Users\\alex\\Documents\\Programming\\pilotcity-first\\java\\src\\main\\tmp";
         profile.setPreference("browser.download.dir", downloadFilepath);
         profile.setPreference("browser.helperapps.neverAsk.saveToDisk", "application/xls");
-        new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ctl00_ContentPlaceHolder1_menuMain\"]/ul/li[2]/a"))).click();
-        new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ctl00_ContentPlaceHolder1_menuMain\"]/ul/li[2]/div/ul/li[2]/a"))).click();
-        new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ctl00_ContentPlaceHolder1_menuMain\"]/ul/li[3]/a"))).click();
+        try {
+            FileUtils.cleanDirectory(new File("src/main/tmp"));
+            new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ctl00_ContentPlaceHolder1_menuMain\"]/ul/li[2]/a"))).click();
+            new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ctl00_ContentPlaceHolder1_menuMain\"]/ul/li[2]/div/ul/li[2]/a"))).click();
+            new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ctl00_ContentPlaceHolder1_menuMain\"]/ul/li[3]/a"))).click();
 
-        new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ctl00_ContentPlaceHolder1_menuMain\"]/ul/li[3]/div/ul/li[1]/a"))).click();
+            new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ctl00_ContentPlaceHolder1_menuMain\"]/ul/li[3]/div/ul/li[1]/a"))).click();
+
+        } catch (Exception e) {
+            System.out.println("Exception" + e);
+        }
+
         TimeUnit.SECONDS.sleep(2);
         driver.close();
-        File source = new File("src/main/tmp/Export.xls");
-        File target = new File("src/main/tmp/info.html");
         try {
-            Files.move(source.toPath(),target.toPath());
+            File source = new File("src/main/tmp/Export.xls");
+            File target = new File("src/main/tmp/info.html");
+            Files.move(source.toPath(), target.toPath());
         } catch (IOException e) {
-            e.printStackTrace();
+            FileUtils.cleanDirectory(new File("src/main/tmp"));
+            System.out.println("problem: file not found");
         }
     }
+
     static void insertData(String name, String date, String time, String location) throws IOException, ParseException {
         SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         ClassificationRunner runner = new ClassificationRunner();
@@ -123,7 +133,7 @@ public class GetMeetingMinutes {
         System.out.println("CURRENT TIME");
         System.out.println();
         System.out.println(unixTimestamp);*/
-        if (DATETIME.getTime()/1000>unixTimestamp) {
+        if (DATETIME.getTime() / 1000 > unixTimestamp) {
             Connection conn = null;
             Statement stmt = null;
             try {
@@ -243,14 +253,11 @@ public class GetMeetingMinutes {
 //        System.out.println(doc.title());
 //        System.out.println("https://hayward.legistar.com/" + url);
         Element meetingitems = doc.getElementsByClass("rtsUL").get(1);
+        System.out.println(meetingitems.text());
         if (!meetingitems.text().equals("Meeting Items (0)")) {
             getTable(url);
-
         } else {
-            File f = new File("src/main/tmp/info.html");
-            PrintWriter fout = new PrintWriter(new OutputStreamWriter(new FileOutputStream("src/main/tmp/info.html")));
-            fout.println("NULL");
-            fout.close();
+            System.out.println("no meeting items, error thrown");
 
         }
         String name = doc.getElementById("ctl00_ContentPlaceHolder1_hypName").text();
@@ -265,8 +272,8 @@ public class GetMeetingMinutes {
         ClassificationRunner runner = new ClassificationRunner();
         Connection conn = null;
         Statement stmt = null;
-        if (time.equals("")){
-            time="Time not set yet.";
+        if (time.equals("")) {
+            time = "Time not set yet.";
         }
         try {
             try {
@@ -282,7 +289,7 @@ public class GetMeetingMinutes {
 
             DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
-            query1 = String.format(query1, name, date , time, location, runner.tag(name));
+            query1 = String.format(query1, name, date, time, location, runner.tag(name));
             PreparedStatement ps = conn.prepareStatement(query1, Statement.RETURN_GENERATED_KEYS);
 //            System.out.println(query1);
             ps.executeUpdate();
@@ -351,8 +358,6 @@ public class GetMeetingMinutes {
 //                System.out.println(columns.get(j).text());
             }
         }
-
-
 
 
     }

@@ -5,7 +5,6 @@ if (isset($id)):
 
     ?>
 
-
     <table class="table" id="upcoming-events">
         <thead>
         <tr>

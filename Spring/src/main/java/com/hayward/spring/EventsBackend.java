@@ -56,7 +56,7 @@ public class EventsBackend {
         getNotifications.getEvents();
     }
 
-    @Scheduled(fixedRate = 5 * 1000)
+    //@Scheduled(fixedRate = 5 * 1000)
     void test() {
         Connection conn = null;
         Statement stmt = null;

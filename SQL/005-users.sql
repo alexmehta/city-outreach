@@ -10,6 +10,7 @@ create table if not exists users
 	state varchar(50) null,
 	zip int null,
 	view tinyint(1) default 0 null,
+	name text null,
 	constraint users_email_uindex
 		unique (email),
 	constraint users_id_uindex
