@@ -1,9 +1,12 @@
 <?php
 include "../../includes/csrf.php";
-if (isset($_GET['redirect'])){
+if (isset($_GET['redirect'])) {
     $redirect = $_GET['redirect'];
 }
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,8 +22,10 @@ if (isset($_GET['redirect'])){
         crossorigin="anonymous"></script>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="../../resources/city-of-hayward-squarelogo-1465473393255.png"  style="height: 50px; width: 50px" alt="city of hayward logo"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="#"><img src="../../resources/city-of-hayward-squarelogo-1465473393255.png"
+                                              style="height: 50px; width: 50px" alt="city of hayward logo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -32,7 +37,8 @@ if (isset($_GET['redirect'])){
                 if (!isset($id)) {
                     echo '<li class="nav-item">
           <a class="nav-link" href="createaccount.php">Create Account</a>
-        </li>';              echo '<li class="nav-item">
+        </li>';
+                    echo '<li class="nav-item">
           <a class="nav-link active" href="login.php">Login</a>
         </li>';
 
@@ -47,14 +53,9 @@ if (isset($_GET['redirect'])){
           <a class="nav-link" href="tags/tags.php">Event Types</a>
         </li>';
                         echo '<li class="nav-item">
-          <a class="nav-link" href="login/logout.php">Logout</a>
-        </li>';
-                        echo '<li class="nav-item">
-          <a class="nav-link" href="settings.php">Settings</a>
-        </li>';
-
+<a class="nav-link" href="login/logout.php">Logout</a></li>';
+                        echo '<li class="nav-item"><a class="nav-link" href="settings.php">Settings</a></li>';
                     }
-
                 }
                 ?>
             </ul>
@@ -64,21 +65,21 @@ if (isset($_GET['redirect'])){
 </nav>
 <form action="../loginUser.php" method="post">
     <input type="hidden" name="redirect" value="<?php
-        if (isset($redirect)){
-            echo $redirect;
-    }else{
-            echo "none";
-        } ?>">
-    <input type="hidden" name="token" value="<?php echo $_SESSION['token']?>">
+    if (isset($redirect)) {
+        echo $redirect;
+    } else {
+        echo "none";
+    } ?>">
+    <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?>">
     <div class="mb-3">
         <label class="form-label" for="email">Email</label>
-        <input id="email"  name="email" type="email" required="required">
+        <input id="email" name="email" type="email" required="required">
     </div>
     <div class="mb-3">
         <label class="form-label" for="password">Password</label>
         <input id="password" type="password" name="password">
     </div>
-    <button type="submit"  class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 </body>
 </html>
