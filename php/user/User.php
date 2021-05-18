@@ -2,7 +2,7 @@
 
 class User
 {
-    function BasicUser($email, $password, $DOB)
+    function BasicUser($email, $password, $DOB): string
     {
         ini_set('display_errors', 1);
         include "../includes/includes.php";
