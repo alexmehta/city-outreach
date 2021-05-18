@@ -6,9 +6,6 @@ class User
     {
         ini_set('display_errors', 1);
         include "../includes/includes.php";
-        if ($password = "") {
-            return "failed";
-        }
         $password = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO users (email, password, DOB) values(?,?,?)";
         $stmt = $pdo->prepare($sql);
@@ -18,18 +15,18 @@ class User
 
     function googleUser($email, $userid, $firstname, $lastname, $profile)
     {
+        echo "/includes/includes.php";
         ini_set('display_errors', 1);
-        include "../includes/includes.php";
+        include "../../includes/includes.php";
         if (!$this->googleUserExists($userid)){
             $sql = "INSERT INTO users (email, googleid, firstname,lastname,profile) values(?,?,?,?,?)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$email, $userid, $firstname, $lastname, $profile]);
-        }else{
-            $this->validateGoogleUser($userid);
         }
+        $this->validateGoogleUser($userid);
     }
     function validateGoogleUser($userid){
-        include "../includes/includes.php";
+        include "../../includes/includes.php";
         $sql = "SELECT * FROM users WHERE googleid = ? LIMIT 1";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$userid]);
@@ -41,12 +38,12 @@ class User
         $_SESSION['loged'] = true;
         $_COOKIE['view'] = $stmt['view'];
         $_COOKIE['last_login'] = date("Y/m/d");
-
+        header("../../index.php");
     }
-    function googleUserExists($userid)
+    function googleUserExists($userid): bool
     {
         ini_set('display_errors', 1);
-        include "../includes/includes.php";
+        include "../../includes/includes.php";
         $sql = "SELECT * FROM users WHERE googleid=?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$userid]);
