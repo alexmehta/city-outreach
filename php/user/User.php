@@ -4,7 +4,6 @@ class User
 {
     function BasicUser($email, $password, $DOB)
     {
-        ini_set('display_errors', 1);
         include "../includes/includes.php";
         $password = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO users (email, password, DOB) values(?,?,?)";
@@ -15,8 +14,6 @@ class User
 
     function googleUser($email, $userid, $firstname, $lastname, $profile)
     {
-        echo "/includes/includes.php";
-        ini_set('display_errors', 1);
         include "../../includes/includes.php";
         if (!$this->googleUserExists($userid)){
             $sql = "INSERT INTO users (email, googleid, firstname,lastname,profile) values(?,?,?,?,?)";
@@ -105,13 +102,13 @@ class User
                     $_SESSION['loged'] = true;
                     $_COOKIE['view'] = $stmt['view'];
                     $_COOKIE['last_login'] = date("Y/m/d");
-
                 }
             }
         }
         if ($redirect != "none") {
             header("LOCATION: .." . $redirect);
         } else {
+
             header("LOCATION: ../index.php");
         }
     }
