@@ -19,6 +19,9 @@ session_start();
 <a href="settings/view/key_issues.php">Key Issues</a>
 <br>
 <a href="settings/view/notifications.php">Notifications</a>
+<br>
+<a href="settings/view/LocationNotifications.php">Change Notification Location</a>
+
 <?php
 if ($_SESSION['view']) {
     echo "<a href='settings/db/view.php?answer=all'>Show all events</a>";
