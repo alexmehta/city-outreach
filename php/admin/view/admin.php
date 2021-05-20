@@ -1,5 +1,6 @@
 <?php
-include "../model/Events.php";
+require_once "loginCheck.php";
+require_once "../model/Events.php";
 $event = new Events();
 ?>
 <!doctype html>
