@@ -1,15 +1,17 @@
 <?php 
-class Admin{
+class Admin
+{
 
 
-
-	function checkAdmin($userId){
+    function checkAdmin($userId)
+    {
         include "../../includes/includes.php";
-        $sql = "LIMIT 1 SELECT admin FROM users where id=?"
+        $sql = "SELECT admin FROM users where id=?";
         $sql = $pdo->prepare($sql);
-        $sql = $sql->execute([$userId]);
-        return $stmt->fetch();
-	}	
-
+        $sql->execute([$userId]);
+        $sql = $sql->fetch();
+        return $sql['admin'];
+    }
+}
 
 ?>
