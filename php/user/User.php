@@ -2,7 +2,7 @@
 
 class User
 {
-    function BasicUser($email, $password, $DOB)
+    function BasicUser($email, $password, $DOB): string
     {
         include "../includes/includes.php";
         $password = password_hash($password, PASSWORD_DEFAULT);
@@ -15,14 +15,30 @@ class User
     function googleUser($email, $userid, $firstname, $lastname, $profile)
     {
         include "../../includes/includes.php";
-        if (!$this->googleUserExists($userid)){
+        if (!$this->googleUserExists($userid)) {
             $sql = "INSERT INTO users (email, googleid, firstname,lastname,profile) values(?,?,?,?,?)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$email, $userid, $firstname, $lastname, $profile]);
         }
         $this->validateGoogleUser($userid);
     }
-    function validateGoogleUser($userid){
+
+    function googleUserExists($userid): bool
+    {
+        ini_set('display_errors', 1);
+        include "../../includes/includes.php";
+        $sql = "SELECT * FROM users WHERE googleid=?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$userid]);
+        if ($stmt->rowCount() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function validateGoogleUser($userid)
+    {
         include "../../includes/includes.php";
         $sql = "SELECT * FROM users WHERE googleid = ? LIMIT 1";
         $stmt = $pdo->prepare($sql);
@@ -37,28 +53,83 @@ class User
         $_COOKIE['last_login'] = date("Y/m/d");
         header("../../index.php");
     }
-    function googleUserExists($userid): bool
+
+    function distance($lat1, $lon1, $lat2, $lon2, $unit)
     {
-        ini_set('display_errors', 1);
-        include "../../includes/includes.php";
-        $sql = "SELECT * FROM users WHERE googleid=?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$userid]);
-        if ($stmt->rowCount()==0){
-            return false;
-        }else{
-            return true;
+        $theta = $lon1 - $lon2;
+        $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+        $dist = acos($dist);
+        $dist = rad2deg($dist);
+        $miles = $dist * 60 * 1.1515;
+        $unit = strtoupper($unit);
+
+        if ($unit == "K") {
+            return ($miles * 1.609344);
+        } else if ($unit == "N") {
+            return ($miles * 0.8684);
+        } else {
+            return $miles;
         }
+
     }
 
+    function turnOffNotifications()
+    {
+        session_start();
+        $id = $_SESSION['id'];
+        include "../../includes/includes.php";
+        $sql = "UPDATE users SET notifications=false WHERE id=?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$id]);
+        echo 'done';
+    }
+
+    function turnOnNotifications($miles)
+    {
+        session_start();
+        $id  = $_SESSION['id'];
+        include "../../includes/includes.php";
+        $sql = "UPDATE users SET miles=?, notifications = true WHERE id=?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$miles,$id]);
+        return "done";
+    }
     function location($line1, $line2, $city, $state, $zip, $id)
     {
         ini_set('display_errors', 1);
         include "../../includes/includes.php";
-        $sql = "UPDATE users SET address1=?,address2=?,city=?,state=?,zip=? WHERE id=?";
+        $sql = "UPDATE users SET address1=?,address2=?,city=?,state=? WHERE id=?";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$line1, $line2, $city, $state, $zip, $id]);
+        $stmt->execute([$line1, $line2, $city, $state,$id]);
+        $address = $line1 . " " . $line2 . ", " . $city . ", " . $state;
+        $geocode = file_get_contents("http://open.mapquestapi.com/geocoding/v1/address?key=l0xvGksmufrkzdxcOLx8FjkIco0kvBNW&location=" . $address);
+        $output = json_decode($geocode, true);
+        //print_r($geocode);
+        //print_r($output);
+//        ->results->locations->displayLatLng->lng
+        $lat = $output["results"][0]["locations"][0]["latLng"]["lat"];
+        $long = $output["results"][0]["locations"][0]["latLng"]["lng"];
 
+        /*
+                echo $lat . " ," . $long;
+
+                $geocode = file_get_contents("http://open.mapquestapi.com/geocoding/v1/address?key=l0xvGksmufrkzdxcOLx8FjkIco0kvBNW&location=" . $lat . "," . $long);
+                $output = json_decode($geocode,true);
+                print_r($output) ;
+
+                $long = $output["results"][0]["locations"][0]["street"];
+
+                echo $long;*/
+        $this->setLatLong($lat, $long, $id);
+    }
+
+    function setLatLong($latitude, $longitude, $id)
+    {
+        ini_set('display_errors', 1);
+        include "../../includes/includes.php";
+        $sql = "UPDATE users SET longitude=? , latitude=? WHERE id=?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$longitude, $latitude, $id]);
     }
 
     function changeDefaults($id)
