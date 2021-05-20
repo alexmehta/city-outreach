@@ -2,10 +2,8 @@
 if (isset($_GET['redirect'])) {
     $redirect = $_GET['redirect'];
 }
-?>
-<?php
+session_start();
 require_once "../../vendor/autoload.php";
-
 //Make object of Google API Client for call Google API
 $google_client = new Google_Client();
 
@@ -74,8 +72,7 @@ if (isset($_GET["code"])) {
         $user = new User();
         $user->googleUser($data['email'], $data['id'], $data['given_name'], $data['family_name'], $data['picture']);
     }
-    //include after google info
-    include "../../includes/csrf.php";
+
 
 }
 
@@ -151,7 +148,6 @@ if (!isset($_SESSION['access_token'])) {
     } else {
         echo "none";
     } ?>">
-    <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?>">
     <div class="mb-3">
         <label class="form-label" for="email">Email</label>
         <input id="email" name="email" type="email" required="required">

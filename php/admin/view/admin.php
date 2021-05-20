@@ -1,6 +1,7 @@
 <?php
-    ?>
-
+include "../model/Events.php";
+$event = new Events();
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,25 +10,29 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 <body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-        Expand graph
-    </a>
+<a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+   aria-controls="collapseExample">
+    Toggle Datachart
+</a>
 
 <div class="container">
     <div class="row">
         <div class="col"
-            >
+        >
             <div class="collapse " id="collapseExample">
                 <div class="">
-                    <canvas  id="myChart"></canvas>
+                    <canvas id="myChart"></canvas>
                 </div>
             </div>
         </div>
@@ -58,18 +63,18 @@
                         ?>
                         <tr>
                             <td>
-                                <a href="event.php?id=<?php echo $row['id']?>"><?php  echo $row['name'];?></a>
+                                <a href="event.php?id=<?php echo $row['id'] ?>"><?php echo $row['name']; ?></a>
 
                             </td>
-                            <td><?php echo $row['date']?></td>
+                            <td><?php echo $row['date'] ?></td>
                             <td>
-                                <?php echo $row['time'];?>
+                                <?php echo $row['time']; ?>
                             </td>
-                            <td><?php echo $row['tag']?></td>
+                            <td><?php echo $row['tag'] ?></td>
                             <td>
                                 <?php
                                 $sql = "SELECT * FROM meetingminutes WHERE event=?";
-                                $stmt2=$pdo->prepare($sql);
+                                $stmt2 = $pdo->prepare($sql);
                                 $stmt2->execute([$row['id']]);
                                 $s = [];
                                 $index = 0;
@@ -81,10 +86,10 @@
                                     $index++;
                                     ?>
 
-                                <?php endwhile;?>
+                                <?php endwhile; ?>
                                 <?php
-                                foreach ($s as $item){
-                                    if (!array_key_exists($item, $s)){
+                                foreach ($s as $item) {
+                                    if (!array_key_exists($item, $s)) {
                                         echo $item . " ";
                                         $s[$item] = true;
                                     }
@@ -93,8 +98,8 @@
                                 ?>
                             </td>
                         </tr>
-                    <?php endif?>
-                <?php endwhile;?>
+                    <?php endif ?>
+                <?php endwhile; ?>
                 </tbody>
             </table>
         </div>
@@ -105,14 +110,15 @@
 
 <script>
     const data = {
-        labels: [
-            'Red',
-            'Blue',
-            'Yellow'
-        ],
+        labels: <?php     echo $event->getsOfTags();?>
+
+        ,
         datasets: [{
-            label: 'My First Dataset',
-            data: [300, 50, 100],
+            label: 'Events most intrested in',
+            data: <?php
+            echo $event->getCountsAsTags();
+
+            ?>,
             backgroundColor: [
                 'rgb(255, 99, 132)',
                 'rgb(54, 162, 235)',
@@ -127,9 +133,8 @@
         options: {}
     };
 
-    var chart = new Chart(document.getElementById("myChart"),config);
+    const chart = new Chart(document.getElementById("myChart"), config);
 </script>
-
 
 
 </body>
