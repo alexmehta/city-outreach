@@ -6,10 +6,15 @@
 
 
 
+
+
+
+
 namespace Composer;
 
 use Composer\Autoload\ClassLoader;
 use Composer\Semver\VersionParser;
+
 
 
 
@@ -27,8 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-
-    'reference' => 'ff6414f1f551821cd6fdd2fa27a623b5bfc4a9cd',
+    'reference' => 'e24230f38c856cd0019a8573456658a17a062078',
     'name' => '__root__',
   ),
   'versions' => 
@@ -40,8 +44,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-
-      'reference' => 'ff6414f1f551821cd6fdd2fa27a623b5bfc4a9cd',
+      'reference' => 'e24230f38c856cd0019a8573456658a17a062078',
     ),
     'firebase/php-jwt' => 
     array (
