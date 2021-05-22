@@ -4,7 +4,8 @@
 class Events
 {
     //takes tags name and encodes as js list
-    function getsOfTags(){
+    function getsOfTags()
+    {
         $array = array();
         include "../../includes/includes.php";
         $sql = "SELECT * FROM listtags ORDER BY id ASC";
@@ -14,7 +15,7 @@ class Events
         $tags = array();
         $i = 0;
         $ids = array();
-        foreach ($stmt as $row){
+        foreach ($stmt as $row) {
             $tags[$i] = $row['tags'];
             $ids[$i] = $row['id'];
             $i++;
@@ -23,7 +24,9 @@ class Events
 
         return json_encode($tags);
     }
-    function getCountsAsTags(){
+
+    function getCountsAsTags()
+    {
         $array = array();
         include "../../includes/includes.php";
         $sql = "SELECT * FROM listtags ORDER BY id ASC";
@@ -32,14 +35,14 @@ class Events
         $stmt = $stmt->fetchAll();
         $i = 0;
         $ids = array();
-        foreach ($stmt as $row){
+        foreach ($stmt as $row) {
             $sql = "SELECT * FROM upcomingevents where tag = ?";
             $smt = $pdo->prepare($sql);
             $smt->execute([$row['tags']]);
             $smt = $smt->fetchAll();
             //get events of specific tag
             $answer = 0;
-            foreach ($smt as $row2){
+            foreach ($smt as $row2) {
                 $sql = "SELECT * FROM notifications WHERE eventid=?";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([$row2['id']]);
@@ -50,5 +53,28 @@ class Events
             $i++;
         }
         return json_encode($ids);
+    }
+    function getTags(){
+
+    }
+    function editEvent($id,$event,$date,$time,$location,$tag)
+    {
+        include "../../includes/includes.php";
+
+        $sql = "UPDATE upcomingevents SET name=?,date=?,time=?,location=?,tag=? WHERE id=?";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$event,$date,$time,$location,$tag,$id]);
+
+
+    }
+
+    function getCurrentDetails($id)
+    {
+        include "../../includes/includes.php";
+        $sql = "SELECT * FROM upcomingevents WHERE id = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch();
     }
 }
