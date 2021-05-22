@@ -1,7 +1,8 @@
 <?php
 $events = new Events();
 $events = $events->getCurrentDetails($row['id']);
-
+//todo select tags instead
+//todo create tag creator with similarity detection
 ?>
 <input type="hidden" name="id" value="<?php
 echo $events['id'];
@@ -20,6 +21,7 @@ echo $events['id'];
 
     <option value="volvo">Volvo</option>
 </select>-->
+
 <input type="text" id="tag" name="tag" value="<?php echo $events['tag']; ?>">
 
 

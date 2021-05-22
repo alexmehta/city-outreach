@@ -1,9 +1,10 @@
 <?php
-
+echo "404";
 
 class Notifications
 {
-    function removeNotification($user, $event){
+    function removeNotification($user, $event)
+    {
         require '../includes/includes.php';
         ini_set('display_errors', 1);
         //delete from notifications database a  reminder
@@ -17,18 +18,21 @@ class Notifications
         $statement->execute([$event]);
         $count = $statement->rowCount();
         //check if any other users are assigned to this event
-        if ($count==0){
+        if ($count == 0) {
             $this->removeEventlock($event);
         }
     }
-    function removeEventlock($id){
+
+    function removeEventlock($id)
+    {
         //remove event by updating its lock
         require '../includes/includes.php';
         $statement = "UPDATE upcomingevents SET deleteable=true WHERE id=?";
         $statement = $pdo->prepare($statement);
         $statement->execute([$id]);
     }
-    function insertNotification($user,$event)
+
+    function insertNotification($user, $event)
     {
 
         require '../includes/includes.php';
@@ -41,11 +45,13 @@ class Notifications
         $statement = $pdo->prepare($statement);
         $statement->execute([$event]);
     }
-    function getNotification($eventid, $userid){
+
+    function getNotification($eventid, $userid)
+    {
         require 'includes/includes.php';
         $sql = "SELECT * FROM notifications WHERE userid=? AND eventid=?";
         $sql = $pdo->prepare($sql);
-        $sql->execute([$userid,$eventid]);
+        $sql->execute([$userid, $eventid]);
         return $sql->rowCount();
 
     }

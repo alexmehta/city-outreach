@@ -4,7 +4,7 @@ class User
 {
     function BasicUser($email, $password, $DOB): string
     {
-        include "../includes/includes.php";
+        require "../includes/includes.php";
         $password = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO users (email, password, DOB) values(?,?,?)";
         $stmt = $pdo->prepare($sql);
@@ -14,7 +14,7 @@ class User
 
     function googleUser($email, $userid, $firstname, $lastname, $profile)
     {
-        include "../../includes/includes.php";
+        require "../../includes/includes.php";
         if (!$this->googleUserExists($userid)) {
             $sql = "INSERT INTO users (email, googleid, firstname,lastname,profile) values(?,?,?,?,?)";
             $stmt = $pdo->prepare($sql);
@@ -26,7 +26,7 @@ class User
     function googleUserExists($userid): bool
     {
         ini_set('display_errors', 1);
-        include "../../includes/includes.php";
+        require "../../includes/includes.php";
         $sql = "SELECT * FROM users WHERE googleid=?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$userid]);
@@ -39,7 +39,7 @@ class User
 
     function validateGoogleUser($userid)
     {
-        include "../../includes/includes.php";
+        require "../../includes/includes.php";
         $sql = "SELECT * FROM users WHERE googleid = ? LIMIT 1";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$userid]);
@@ -77,7 +77,7 @@ class User
     {
         session_start();
         $id = $_SESSION['id'];
-        include "../../includes/includes.php";
+        require "../../includes/includes.php";
         $sql = "UPDATE users SET notifications=false WHERE id=?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
@@ -88,7 +88,7 @@ class User
     {
         session_start();
         $id  = $_SESSION['id'];
-        include "../../includes/includes.php";
+        require "../../includes/includes.php";
         $sql = "UPDATE users SET miles=?, notifications = true WHERE id=?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$miles,$id]);
@@ -97,7 +97,7 @@ class User
     function location($line1, $line2, $city, $state, $zip, $id)
     {
         ini_set('display_errors', 1);
-        include "../../includes/includes.php";
+        require "../../includes/includes.php";
         $sql = "UPDATE users SET address1=?,address2=?,city=?,state=? WHERE id=?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$line1, $line2, $city, $state,$id]);
@@ -126,7 +126,7 @@ class User
     function setLatLong($latitude, $longitude, $id)
     {
         ini_set('display_errors', 1);
-        include "../../includes/includes.php";
+        require "../../includes/includes.php";
         $sql = "UPDATE users SET longitude=? , latitude=? WHERE id=?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$longitude, $latitude, $id]);
@@ -135,7 +135,7 @@ class User
     function changeDefaults($id)
     {
         ini_set('display_errors', 1);
-        include "../../includes/includes.php";
+        require "../../includes/includes.php";
         $sql = "UPDATE users SET view = true WHERE id=?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
@@ -158,7 +158,7 @@ class User
     function login($email, $password, $redirect)
     {
         ini_set('display_errors', 1);
-        include "../includes/includes.php";
+        require "../includes/includes.php";
         $sql = "SELECT * FROM users WHERE email = ? LIMIT 1";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$email]);
