@@ -1,5 +1,4 @@
 <?php
-echo "404";
 
 class Notifications
 {
