@@ -1,6 +1,7 @@
 package com.hayward.spring;
 
 import com.hayward.spring.email.GetNotifications;
+import com.hayward.spring.email.inArea.Service;
 import com.hayward.spring.email.updates.GetIntrestingEvents;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.SpringApplication;
@@ -15,12 +16,12 @@ import java.sql.*;
 public class EventsBackend {
     private final GetNotifications getNotifications;
     private final GetIntrestingEvents getIntrestingEvents;
-
+    private final Service inArea;
     public static void main(String[] args) {
         SpringApplication.run(EventsBackend.class, args);
     }
 
-    //0 0 0 * * * should be actual time
+    //real time once per week for intresting events
     @Scheduled(fixedRate = 604800 * 1000)
     void sendEmails() {
         Connection conn = null;
@@ -32,7 +33,6 @@ public class EventsBackend {
             ResultSet statement = stmt.executeQuery("SELECT * FROM users");
             while (statement.next()) {
                 getIntrestingEvents.GenerateEmail(statement.getInt("id"));
-
             }
         } catch (Exception excep) {
             excep.printStackTrace();
@@ -50,43 +50,15 @@ public class EventsBackend {
             }
         }
     }
-
+    //checks every 15 minutes for events to end an email about
     @Scheduled(fixedRate = 1800 * 1000)
     void checkupdates() {
         getNotifications.getEvents();
     }
 
-    //@Scheduled(fixedRate = 5 * 1000)
+    @Scheduled(fixedRate = 5 * 1000)
     void test() {
-        Connection conn = null;
-        Statement stmt = null;
-        try {
-            String url = "jdbc:mysql://localhost:3306/cityofhayward";
-            conn = DriverManager.getConnection(url, "devuser", "devpass");
-            stmt = conn.createStatement();
-            ResultSet statement = stmt.executeQuery("SELECT * FROM users");
-            while (statement.next()) {
-                getIntrestingEvents.GenerateEmail(statement.getInt("id"));
-
-            }
-        } catch (Exception excep) {
-            excep.printStackTrace();
-        } finally {
-            try {
-                if (stmt != null)
-                    conn.close();
-            } catch (SQLException ignored) {
-            }
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-
-
-        getNotifications.getEvents();
+        inArea.runService();
     }
 
     @EnableScheduling
