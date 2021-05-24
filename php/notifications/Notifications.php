@@ -11,7 +11,6 @@ class Notifications
         //check to see if other users are using this event
         $sql = $pdo->prepare($sql);
         $sql->execute([$event, $user]);
-
         $statement = "SELECT * FROM notifications WHERE eventid=?";
         $statement = $pdo->prepare($statement);
         $statement->execute([$event]);
