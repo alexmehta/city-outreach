@@ -26,7 +26,7 @@ if (isset($id)):
         $stmt = $pdo->prepare($stmt);
         $stmt->execute([$_SESSION['id']]);
         //fetches all user intrest roles
-        if ($stmt->rowCount()==0){
+        if ($stmt->rowCount() == 0) {
             echo "Check to see if you have no interests listed";
         }
         while ($row = $stmt->fetch()):?>
@@ -40,7 +40,7 @@ if (isset($id)):
             } catch (Exception $e) {
                 echo $e;
             }
-            if ($row['name']=="Council Sustainability Committee"){
+            if ($row['name'] == "Council Sustainability Committee") {
                 echo $dt->getTimestamp();
                 echo "<br>";
                 echo $dtime->getTimestamp();
@@ -52,7 +52,7 @@ if (isset($id)):
                 ?>
                 <tr>
                     <td>
-                        <a href="event.php?id=<?php echo $row['id'] ?>"><?php echo $row['name']; ?></a>
+                        <a href="/event/view/event.php?id=<?php echo $row['id'] ?>"><?php echo $row['name']; ?></a>
 
                     </td>
                     <td><?php echo $row['date'] ?></td>
@@ -63,7 +63,7 @@ if (isset($id)):
                     <td>
                         <?php
                         $sql = "SELECT * FROM meetingminutes WHERE event=?";
-                        $stmt2=$pdo->prepare($sql);
+                        $stmt2 = $pdo->prepare($sql);
                         $stmt2->execute([$row['id']]);
                         $s = [];
                         $index = 0;
@@ -75,10 +75,10 @@ if (isset($id)):
                             $index++;
                             ?>
 
-                        <?php endwhile;?>
+                        <?php endwhile; ?>
                         <?php
-                        foreach ($s as $item){
-                            if (!array_key_exists($item, $s)){
+                        foreach ($s as $item) {
+                            if (!array_key_exists($item, $s)) {
                                 echo $item . " ";
                                 $s[$item] = true;
                             }
@@ -87,28 +87,28 @@ if (isset($id)):
                         ?>
                     </td>
                     <?php
-                        include_once "notifications/Notifications.php";
-                        $notification = new Notifications();
-                        if ($notification->getNotification($row['id'],$_SESSION['id'])==0):
+                    include_once "notifications/Notifications.php";
+                    $notification = new Notifications();
+                    if ($notification->getNotification($row['id'], $_SESSION['id']) == 0):
 
 
-                    ?>
-                    <td><a href="../notifications/view/addReminder.php?id=<?php echo $row['id']; ?>">Follow</a></td>
+                        ?>
+                        <td><a href="../notifications/view/addReminder.php?id=<?php echo $row['id']; ?>">Follow</a></td>
                     <?php endif;
 
                     ?>
 
                     <?php
-                if ($notification->getNotification($row['id'],$_SESSION['id'])!=0):
+                    if ($notification->getNotification($row['id'], $_SESSION['id']) != 0):
 
 
-                ?>
+                        ?>
 
-                    <td><a href="../notifications/removeReminder.php?id=<?php echo $row['id']; ?>">Unfollow</a></td>
+                        <td><a href="../notifications/removeReminder.php?id=<?php echo $row['id']; ?>">Unfollow</a></td>
 
 
-                <? endif;?>
-                            </tr>
+                    <? endif; ?>
+                </tr>
             <?php endif ?>
         <?php endwhile; ?>
         </tbody>

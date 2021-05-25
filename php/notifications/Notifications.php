@@ -46,7 +46,7 @@ class Notifications
 
     function getNotification($eventid, $userid)
     {
-        require 'includes/includes.php';
+        include $_SERVER['DOCUMENT_ROOT'] . "/includes/includes.php";
         $sql = "SELECT * FROM notifications WHERE userid=? AND eventid=?";
         $sql = $pdo->prepare($sql);
         $sql->execute([$userid, $eventid]);
