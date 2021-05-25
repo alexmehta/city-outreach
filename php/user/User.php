@@ -54,6 +54,16 @@ class User
         header("../../index.php");
     }
 
+    /**
+     * @param $lat1
+     * @param $lon1
+     * @param $lat2
+     * @param $lon2
+     * @param $unit
+     * @return float
+     * @author Alexander Mehta (alexandermehta@outlook.com)
+     * @details calculates distance between 2 cords
+     */
     function distance($lat1, $lon1, $lat2, $lon2, $unit)
     {
         $theta = $lon1 - $lon2;
@@ -73,6 +83,9 @@ class User
 
     }
 
+    /**
+     * @details turns off a users notifications
+     */
     function turnOffNotifications()
     {
         session_start();
@@ -84,23 +97,38 @@ class User
         echo 'done';
     }
 
+    /**
+     * @param $miles
+     * @return string
+     * @details turns on notifications in database
+     */
     function turnOnNotifications($miles)
     {
         session_start();
-        $id  = $_SESSION['id'];
+        $id = $_SESSION['id'];
         require "../../includes/includes.php";
         $sql = "UPDATE users SET miles=?, notifications = true WHERE id=?";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$miles,$id]);
+        $stmt->execute([$miles, $id]);
         return "done";
     }
+
+    /**
+     * @param $line1
+     * @param $line2
+     * @param $city
+     * @param $state
+     * @param $zip
+     * @param $id
+     * @details sets location
+     */
     function location($line1, $line2, $city, $state, $zip, $id)
     {
         ini_set('display_errors', 1);
         require "../../includes/includes.php";
         $sql = "UPDATE users SET address1=?,address2=?,city=?,state=? WHERE id=?";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$line1, $line2, $city, $state,$id]);
+        $stmt->execute([$line1, $line2, $city, $state, $id]);
         $address = $line1 . " " . $line2 . ", " . $city . ", " . $state;
         $geocode = file_get_contents("http://open.mapquestapi.com/geocoding/v1/address?key=l0xvGksmufrkzdxcOLx8FjkIco0kvBNW&location=" . $address);
         $output = json_decode($geocode, true);

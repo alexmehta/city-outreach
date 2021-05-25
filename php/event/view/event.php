@@ -39,15 +39,20 @@ session_start();
     <?php echo $event['name'] ?> <span class="badge bg-secondary"><?php echo $event['tag'] ?></span>
 </h1>
 <h4>
-    <b>
-        Details:
-    </b>
+    <b>Details:</b>
     <p>
         Date: <?php echo $event['date'] . " " . $event['time'] ?>
     </p>
     <p>
         Location: <?php
         echo $event['location'];
+        if (!preg_match("(location|Remote|remote)",$event['location'])){
+            echo "<br>";
+            $event = new Events();
+            echo "<img src = ";
+            echo $event->getMap($_GET['id']);
+            echo ">";
+        }
         ?>
     </p>
     <?php
