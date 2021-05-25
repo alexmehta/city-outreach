@@ -6,14 +6,16 @@ $database_name = "cityofhayward";
 $charset = 'utf8mb4';
 $dsn = "mysql:host=mysql8;dbname=cityofhayward;port=3306";
 $options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
-];
+    PDO::ATTR_EMULATE_PREPARES => false,];
 try {
+    /**
+     * @var PDO
+     */
     $pdo = new PDO($dsn, $superusername, $superpassword, $options);
-}catch ( PDOException $e ) {
+} catch (PDOException $e) {
     echo 'ERROR!';
-    print_r( $e );
+    print_r($e);
 }
 ?>
