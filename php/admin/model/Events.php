@@ -54,8 +54,21 @@ class Events
         }
         return json_encode($ids);
     }
+    function createTag($name){
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/includes/database.php";
+        $database = new database();
+        $pdo = $database->connect();
+        $sql = "INSERT into listtags(tags) VALUE(?)";
+        $sql = $pdo->prepare($sql);
+        $sql->execute([$name]);
+    }
     function getTags(){
-
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/includes/database.php";
+        $database = new database();
+        $pdo = $database->connect();
+        $sql = "SELECT * FROM listtags";
+        $sql = $pdo->prepare($sql);
+        return $sql->execute();
     }
     function editEvent($id,$event,$date,$time,$location,$tag)
     {

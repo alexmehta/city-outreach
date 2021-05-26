@@ -117,7 +117,7 @@ $event = new Events();
 
 <script>
     const data = {
-        labels: <?php     echo $event->getsOfTags();?>
+        labels: <?php echo $event->getsOfTags();?>
 
         ,
         datasets: [{
