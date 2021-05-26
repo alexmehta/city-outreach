@@ -33,6 +33,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/geocoder-php/google-maps-provider" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/geocoder-php/common-http" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/willdurand/geocoder" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/eluceo/ical" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

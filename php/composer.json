@@ -3,6 +3,7 @@
         "google/apiclient": "^2.0",
         "ext-json": "*",
       "ext-pdo": "*",
-      "ext-curl": "*"
+      "ext-curl": "*",
+        "eluceo/ical": "^2.2"
     }
 }

@@ -19,4 +19,5 @@ return array(
     'Google\\Auth\\' => array($vendorDir . '/google/auth/src'),
     'Google\\' => array($vendorDir . '/google/apiclient/src'),
     'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
+    'Eluceo\\iCal\\' => array($vendorDir . '/eluceo/ical/src'),
 );

@@ -32,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '14f90765f04263a88b62aebd2a7565ef2d060fe9',
+    'reference' => '2d90812dda0307b12c74aea2025c548227905564',
     'name' => '__root__',
   ),
   'versions' => 
@@ -44,7 +44,16 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '14f90765f04263a88b62aebd2a7565ef2d060fe9',
+      'reference' => '2d90812dda0307b12c74aea2025c548227905564',
+    ),
+    'eluceo/ical' => 
+    array (
+      'pretty_version' => '2.2.0',
+      'version' => '2.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '84bba8f438a2746a88057ad13032d71e8f9c4104',
     ),
     'firebase/php-jwt' => 
     array (
@@ -210,6 +219,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '120b605dfeb996808c31b6477290a714d356e822',
+    ),
+    'symfony/deprecation-contracts' => 
+    array (
+      'pretty_version' => 'v2.4.0',
+      'version' => '2.4.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '5f38c8804a9e97d23e0c8d63341088cd8a22d627',
     ),
   ),
 );

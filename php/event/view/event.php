@@ -4,7 +4,6 @@ $event = new Events();
 $event = $event->getEvent($_GET['id']);
 session_start();
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -46,7 +45,7 @@ session_start();
     <p>
         Location: <?php
         echo $event['location'];
-        if (!preg_match("(location|Remote|remote)",$event['location'])){
+        if (!preg_match("(location|Remote|remote)", $event['location'])) {
             echo "<br>";
             $event = new Events();
             echo "<img src = ";
@@ -75,6 +74,14 @@ session_start();
 
 
     <? endif; ?>
+</h4>
+<h4>
+    Add to calendar:
+
+    <?php
+        include "cal.php" ;
+
+    ?>
 </h4>
 </body>
 </html>
