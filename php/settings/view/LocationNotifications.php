@@ -1,5 +1,9 @@
 <?php
-    ?>
+require_once $_SERVER['DOCUMENT_ROOT'] . "/user/User.php";
+$user = new User();
+session_start();
+
+?>
 
 <!doctype html>
 <html lang="en">
@@ -16,7 +20,10 @@
         <label for="time-period">
             Miles
         </label>
-        <input name="miles" id="time-period" type="number">
+        <input name="miles" id="time-period" type="number" value="<?php
+        echo $user->getPreferredDistance($_SESSION['id']);?>" placeholder="<?php
+        echo $user->getPreferredDistance($_SESSION['id']);
+        ?>">
         <input id="submit" name="submit" value="submit" type="submit">
     </form>
     <form action="../db/turnOffLocation.php" method="post">
