@@ -82,7 +82,20 @@ class User
         }
 
     }
+    function getPreferredDistance($id){
 
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/includes/database.php";
+        $database = new database();
+        $pdo = $database->connect();
+        $sql = "SELECT * FROM users where id=?";
+        $sql = $pdo->prepare($sql);
+        $sql->execute([$id]);
+        $sql = $sql->fetch();
+        if ($sql['miles']==0){
+            return "";
+        }
+        return $sql['miles'];
+    }
     /**
      * @details turns off a users notifications
      */

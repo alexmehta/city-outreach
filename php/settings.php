@@ -18,9 +18,8 @@ session_start();
 <br>
 <a href="settings/view/key_issues.php">Key Issues</a>
 <br>
-<a href="settings/view/notifications.php">Notifications</a>
-<br>
 <a href="settings/view/LocationNotifications.php">Change Notification Location</a>
+<br>
 
 <?php
 if ($_SESSION['view']) {
@@ -29,7 +28,6 @@ if ($_SESSION['view']) {
 } else {
     echo "<a href='settings/db/view.php?answer=key'>Show only key events</a>";
 }
-
 ?>
 </body>
 </html>
