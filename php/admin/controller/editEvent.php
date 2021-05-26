@@ -17,12 +17,24 @@ echo $events['id'];
 <input type="text" id="location" name="location" value="<?php echo $events['location']; ?>">
 
 <label for="tag">Tag</label>
-<!--<select name="cars" id="tag">
+<select name="tag" id="tag">
+    <?php
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/includes/database.php";
+    $database = new database();
+    $pdo = $database->connect();
+    $sql = "SELECT * FROM listtags";
+    $sql = $pdo->prepare($sql);
+    $sql->execute([]);
+    while($row = $sql->fetch()):
 
-    <option value="volvo">Volvo</option>
-</select>-->
+        ?>
+        <option value="<?php echo $row['tags']?>"><?php echo $row['tags']?></option>
 
-<input type="text" id="tag" name="tag" value="<?php echo $events['tag']; ?>">
+    <?php endwhile;?>
+    <option onclick="window.open('newtag.php','_Blank','widht=500px,height=500px')">Create new Tag</option>
+
+</select>
+
 
 
 
