@@ -76,12 +76,6 @@ session_start();
     <? endif; ?>
 </h4>
 <h4>
-    Add to calendar:
-
-    <?php
-        include "cal.php" ;
-
-    ?>
 </h4>
 </body>
 </html>
