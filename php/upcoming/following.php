@@ -32,18 +32,17 @@ if (isset($id)):
         while ($row = $stmt->fetch()):?>
             <?php
             //checks if it is upcoming based on unix time (converts first from sql string)
-
             $dtime = DateTime::createFromFormat("m/d/Y h:i A", $row['date'] . " " . $row['time']);
 
             try {
                 $dt = new DateTime("now", new DateTimeZone('America/Phoenix'));
             } catch (Exception $e) {
-                echo $e;
+                //echo $e;
             }
             if ($row['name'] == "Council Sustainability Committee") {
-                echo $dt->getTimestamp();
-                echo "<br>";
-                echo $dtime->getTimestamp();
+                //echo $dt->getTimestamp();
+                //echo "<br>";
+                //echo $dtime->getTimestamp();
             }
 
 
@@ -89,25 +88,14 @@ if (isset($id)):
                     <?php
                     include_once "notifications/Notifications.php";
                     $notification = new Notifications();
-                    if ($notification->getNotification($row['id'], $_SESSION['id']) == 0):
-
-
-                        ?>
+                    if ($notification->getNotification($row['id'], $_SESSION['id']) == 0):?>
                         <td><a href="../notifications/view/addReminder.php?id=<?php echo $row['id']; ?>">Follow</a></td>
-                    <?php endif;
-
-                    ?>
-
+                    <?php endif; ?>
                     <?php
                     if ($notification->getNotification($row['id'], $_SESSION['id']) != 0):
-
-
                         ?>
-
                         <td><a href="../notifications/removeReminder.php?id=<?php echo $row['id']; ?>">Unfollow</a></td>
-
-
-                    <? endif; ?>
+                    <?php endif; ?>
                 </tr>
             <?php endif ?>
         <?php endwhile; ?>

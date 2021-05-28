@@ -45,11 +45,15 @@ session_start();
     <p>
         Location: <?php
         echo $event['location'];
-        if (!preg_match("(location|Remote|remote)", $event['location'])) {
+        if (!preg_match("(location|Remote|remote|REMOTE)", $event['location'])) {
             echo "<br>";
-            $event = new Events();
+            $events = new Events();
             echo "<img src = ";
-            echo $event->getMap($_GET['id']);
+            try {
+                echo $events->getMap($_GET['id']);
+            } catch (Exception $e) {
+
+            }
             echo ">";
         }
         ?>
