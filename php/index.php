@@ -86,8 +86,13 @@ if (isset($_SESSION['id'])) {
     if ($_SESSION['view']) {
         include "upcoming/following.php";
     } else {
+
+
         include "upcoming/defaultview.php";
     }
+}else{
+    include_once "upcoming/intro.php";
+
 }
 
 ?>

@@ -18,9 +18,15 @@ public class Rest {
     public String getvalues() throws IOException, InterruptedException, SQLException, ParseException {
         cleanDB();
         System.out.println("Cleaned DB");
-        parseTable(8);
+        parseTable(8, "https://hayward.legistar.com/Calendar.aspx");
         FileUtils.cleanDirectory(new File("src/main/tmp"));
         return "Complete: inserted values";
+    }
+
+    @PostMapping("/test")
+    public String testing() throws IOException, InterruptedException, SQLException, ParseException {
+        GetMeetingMinutes getMeetingMinutes = new GetMeetingMinutes();
+        return getMeetingMinutes.test();
     }
 
 }
