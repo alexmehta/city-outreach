@@ -26,7 +26,7 @@ public class GetIntrestingEvents {
             stmt = conn.createStatement();
             ResultSet statement = stmt.executeQuery("SELECT * FROM users WHERE id= " + id);
             while (statement.next()) {
-                return statement.getString("name");
+                return statement.getString("firstname");
             }
         } catch (Exception excep) {
             excep.printStackTrace();

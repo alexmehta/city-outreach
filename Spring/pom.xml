@@ -123,7 +123,11 @@ two freemarker.jar-s and unpredictable behavior!
             <artifactId>commons-validator</artifactId>
             <version>1.7</version>
         </dependency>
-
+        <dependency>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>htmlunit</artifactId>
+            <version>2.23</version>
+        </dependency>
         <!--        https://github.com/ptnplanet/Java-Naive-Bayes-Classifier-->
         <dependency>
             <groupId>io.github.jkindwall</groupId>
