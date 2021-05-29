@@ -29,7 +29,7 @@ public class EmailsService implements EmailSender {
 
         helper.setText(String.format(mess, event, date, location), true);
         helper.setTo(to);
-        helper.setFrom("cyberorangelord17@gmail.com");
+        helper.setFrom("cityofhayward123@gmail.com");
         mailSender.send(message);
     }
 }
