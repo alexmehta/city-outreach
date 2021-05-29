@@ -40,8 +40,9 @@ class Events
             $this->createLatLong($sql['location'],$id);
         }
         $image = "images/" . $sql['id'] . ".png";
+
         $map = ("https://www.mapquestapi.com/staticmap/v4/getmap?key=l0xvGksmufrkzdxcOLx8FjkIco0kvBNW&size=600,400&type=map&imagetype=png&pois=Location," . $sql['lat'] . "," . $sql['long']);
-        if (!file_exists($image)) {
+         if (!file_exists($image)) {
             $data = $this->file_get_contents_curl(
                 $map);
             file_put_contents($image, $data);

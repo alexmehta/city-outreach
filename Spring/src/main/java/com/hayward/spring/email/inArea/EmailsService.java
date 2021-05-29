@@ -26,6 +26,7 @@ public class EmailsService implements EmailSender {
         MimeMessageHelper helper = new MimeMessageHelper(message, "utf-8");
         helper.setSubject(subject);
         String mess = FileUtils.readFileToString(new File("src/main/resources/location.html"));
+
         helper.setText(String.format(mess, event, date, location), true);
         helper.setTo(to);
         helper.setFrom("cyberorangelord17@gmail.com");

@@ -83,6 +83,7 @@ public class Miles {
     public void mission(User user) throws MessagingException, IOException {
         ArrayList<Event> events = getTags();
         for (Event event : events) {
+            System.out.println(event.getName());
             if (checkDistance(event, user) && notSent(event.getId(), user.getId())  ) {
                 //since this should be a notification, we will check if email has already been sent, if not, add to db then send
                 sender.send(user.getEmail(), event.getName() + " is near your location", event.getName(), event.getDate(), event.getLocation());
