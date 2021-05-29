@@ -16,7 +16,7 @@ create table if not exists users
 	notifications tinyint(1) default 0 not null,
 	longitude double null,
 	latitude double null,
-	miles int null,
+	miles int default 0 null,
 	admin tinyint(1) default 0 null,
 	constraint users_email_uindex
 		unique (email),

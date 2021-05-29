@@ -67,7 +67,7 @@ public class PDFreader {
     //go through pdf and try to find mentions of hayward.zoom.us
     public static String parsePDF(int id) {
         String text = getPDF(id);
-        List<String> splitStr = Arrays.stream(text.split(","))
+        List<String> splitStr = Arrays.stream(text.split(" "))
                 .map(String::trim)
                 .collect(Collectors.toList());
         for (String s : splitStr) {
@@ -80,11 +80,14 @@ public class PDFreader {
 
     //update the sql row
     public static void Update(String url, int id) {
-        String query = "UPDATE upcomingevents SET zoomlink='%s' WHERE id=%s";
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cityofhayward", "devuser", "devpass");
-             Statement stmt = conn.createStatement()
+
         ) {
-            stmt.executeUpdate(String.format(query, url,id));
+
+            PreparedStatement Statement = conn.prepareStatement("UPDATE upcomingevents SET zoomlink=? WHERE id=?");
+            Statement.setString(1, url);
+            Statement.setInt(2, id);
+            Statement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
