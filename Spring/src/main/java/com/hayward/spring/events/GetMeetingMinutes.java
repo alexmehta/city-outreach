@@ -15,22 +15,33 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class GetMeetingMinutes {
+    public static PrintWriter out;
+
+    static {
+        try {
+            out = new PrintWriter("log.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) throws IOException, InterruptedException, SQLException, ParseException {
         cleanDB();
         parseTable(8, "https://hayward.legistar.com/Calendar.aspx");
+        out.close();
     }
 
     public static void cleanDB() throws SQLException {
@@ -50,7 +61,7 @@ public class GetMeetingMinutes {
             PreparedStatement ps = conn.prepareStatement(query1, Statement.RETURN_GENERATED_KEYS);
 //            System.out.println(query1);
             ps.executeUpdate();
-            query1 = "TRUNCATE TABLE upcomingevents";
+            query1 = "DELETE FROM upcomingevents WHERE deleteable=1";
             stmt = conn.createStatement();
             stmt.executeUpdate(query1);
         } catch (Exception excep) {
@@ -119,20 +130,10 @@ public class GetMeetingMinutes {
         }
     }
 
-    static void insertData(String name, String date, String time, String location) throws IOException, ParseException {
+    static int insertData(String name, String date, String time, String location, String urls, String pdf) throws IOException, ParseException {
         SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        int id = 0;
         ClassificationRunner runner = new ClassificationRunner();
-        Date DATETIME = df.parse(date);
-        long unixTimestamp = Instant.now().getEpochSecond();
-        System.out.println("TIME");
-        System.out.println(
-        );
-        System.out.println("DATETIME");
-        System.out.println(DATETIME.getDate());
-        System.out.println(DATETIME.getTime());
-        System.out.println("CURRENT TIME");
-        System.out.println();
-        System.out.println(unixTimestamp);
         Connection conn = null;
         Statement stmt = null;
         try {
@@ -145,28 +146,16 @@ public class GetMeetingMinutes {
             conn = DriverManager.getConnection(url, "devuser", "devpass");
 //                System.out.println("Connection is created successfully:");
             stmt = conn.createStatement();
-            String query1 = "INSERT INTO upcomingevents (name,date,time,location,tag) " + "VALUES ('%s','%s','%s','%s','%s')";
-            query1 = String.format(query1, name, date, time, location, runner.tag(name));
+            String query1 = "INSERT INTO upcomingevents (name,date,time,location,tag,url,pdf) " + "VALUES ('%s','%s','%s','%s','%s','%s','%s')";
+            query1 = String.format(query1, name, date, time, location, runner.tag(name), urls, pdf);
             PreparedStatement ps = conn.prepareStatement(query1, Statement.RETURN_GENERATED_KEYS);
-//                System.out.println(query1);
             ps.executeUpdate();
         } catch (Exception excep) {
             excep.printStackTrace();
-        } finally {
-            try {
-                if (stmt != null)
-                    conn.close();
-            } catch (SQLException ignored) {
-            }
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-
-            parse(new File("src/main/tmp/info.html"), 0);
         }
+        parse(new File("src/main/tmp/info.html"), 0);
+        return id;
+
 
     }
 
@@ -206,7 +195,7 @@ public class GetMeetingMinutes {
             try {
                 if (stmt != null)
                     conn.close();
-            } catch (SQLException se) {
+            } catch (SQLException ignored) {
             }
             try {
                 if (conn != null)
@@ -249,10 +238,8 @@ public class GetMeetingMinutes {
 
     }
 
-    static void click(String url) throws IOException, InterruptedException, ParseException {
+    static void click(String url) throws IOException, InterruptedException, ParseException, SQLException {
         Document doc = Jsoup.connect("https://hayward.legistar.com/" + url).get();
-//        System.out.println(doc.title());
-//        System.out.println("https://hayward.legistar.com/" + url);
         Element meetingitems = doc.getElementsByClass("rtsUL").get(1);
         System.out.println(meetingitems.text());
         if (!meetingitems.text().equals("Meeting Items (0)")) {
@@ -265,12 +252,35 @@ public class GetMeetingMinutes {
         String time = doc.getElementById("ctl00_ContentPlaceHolder1_lblTime").text();
         String location = doc.getElementById("ctl00_ContentPlaceHolder1_lblLocation").text();
         System.out.println(name);
-        insertData(name, date, time, location);
         Element agenda = doc.getElementById("ctl00_ContentPlaceHolder1_hypAgenda");
-        if (agenda.hasText()){
-            System.out.println("text");
-            System.out.println(agenda.attr("href").toString());
+        insertData(name, date, time, location, url, agenda.attr("href"));
+    }
+
+    static void insertPDF(String url, int id) throws FileNotFoundException, SQLException {
+        String urle = "jdbc:mysql://localhost:3306/cityofhayward";
+
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(urle, "devuser", "devpass");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
+        Statement statement = conn.createStatement();
+        String query = "UPDATE upcomingevents SET url = '%s' WHERE id='%s'";
+        query = String.format(query, url, id);
+        System.out.println(query);
+        out.println(query);
+        try {
+            System.out.println("pdf");
+            conn = DriverManager.getConnection(urle, "devuser", "devpass");
+            System.out.println("Connection is created successfully:");
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
     }
 
     static void insertEventNOTNULL(String name, String date, String time, String location) {
@@ -316,7 +326,7 @@ public class GetMeetingMinutes {
         }
     }
 
-    public static void parseTable(int num, String url) throws IOException, InterruptedException, ParseException {
+    public static void parseTable(int num, String url) throws IOException, InterruptedException, ParseException, SQLException {
         Document doc = Jsoup.connect(url).get();
         Element table = doc.getElementById("ctl00_ContentPlaceHolder1_gridCalendar_ctl00");
         Elements rows = table.select("tr");
@@ -412,13 +422,18 @@ public class GetMeetingMinutes {
         // Adding cpabilities to ChromeOptions
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(true);
+        options.addArguments("--window-size=1920,1080");
+        options.addArguments("--disable-extensions");
+        options.addArguments("--proxy-server='direct://'");
+        options.addArguments("--proxy-bypass-list=*");
+        options.addArguments("--start-maximized");
         options.addArguments("--headless");
-        options.addArguments("headless");
-        options.setHeadless(true);
+        options.addArguments("--disable-gpu");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--ignore-certificate-errors");
 
         options.setExperimentalOption("prefs", prefs);
-        //printing set download directory
-        System.out.println(options.getExperimentalOption("prefs"));
         // Launching browser with desired capabilities
         FirefoxProfile profile = new FirefoxProfile();
         profile.setAssumeUntrustedCertificateIssuer(false);
