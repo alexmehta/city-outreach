@@ -177,7 +177,7 @@ public class GetMeetingMinutes {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
             } catch (Exception e) {
-//                System.out.println(e);
+                System.out.println(e);
             }
             String url = "jdbc:mysql://localhost:3306/cityofhayward";
             conn = DriverManager.getConnection(url, "devuser", "devpass");
@@ -194,14 +194,12 @@ public class GetMeetingMinutes {
             stmt = conn.createStatement();
             FileUtils.cleanDirectory(new File("src/main/tmp"));
             query1 = String.format(query1, name, tag, id);
-            query1 = query1.replace("'","`");
+            query1 = query1.replace("'", "'");
 
 //            System.out.println(query1);
             stmt.executeUpdate(query1);
 
 
-        } catch (SQLException excep) {
-            excep.printStackTrace();
         } catch (Exception excep) {
             excep.printStackTrace();
         } finally {
@@ -268,6 +266,11 @@ public class GetMeetingMinutes {
         String location = doc.getElementById("ctl00_ContentPlaceHolder1_lblLocation").text();
         System.out.println(name);
         insertData(name, date, time, location);
+        Element agenda = doc.getElementById("ctl00_ContentPlaceHolder1_hypAgenda");
+        if (agenda.hasText()){
+            System.out.println("text");
+            System.out.println(agenda.attr("href").toString());
+        }
     }
 
     static void insertEventNOTNULL(String name, String date, String time, String location) {

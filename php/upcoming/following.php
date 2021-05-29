@@ -42,7 +42,6 @@ if (isset($id)):
             }
 
 
-
             if ($dtime->getTimestamp() > $dt->getTimestamp()):
 
                 ?>
@@ -56,7 +55,7 @@ if (isset($id)):
                         <?php echo $row['time']; ?>
                     </td>
                     <td>
-                        <?php echo $row['location'];?>
+                        <?php echo $row['location']; ?>
                     </td>
                     <td><?php echo $row['tag'] ?></td>
                     <td>
