@@ -13,6 +13,7 @@ if (isset($id)):
             </th>
             <th>Date</th>
             <th>Time</th>
+            <th>Location</th>
             <th>main tag</th>
             <th>Other events in meeting</th>
             <th>Follow Event</th>
@@ -39,11 +40,7 @@ if (isset($id)):
             } catch (Exception $e) {
                 //echo $e;
             }
-            if ($row['name'] == "Council Sustainability Committee") {
-                //echo $dt->getTimestamp();
-                //echo "<br>";
-                //echo $dtime->getTimestamp();
-            }
+
 
 
             if ($dtime->getTimestamp() > $dt->getTimestamp()):
@@ -57,6 +54,9 @@ if (isset($id)):
                     <td><?php echo $row['date'] ?></td>
                     <td>
                         <?php echo $row['time']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['location'];?>
                     </td>
                     <td><?php echo $row['tag'] ?></td>
                     <td>
@@ -78,7 +78,10 @@ if (isset($id)):
                         <?php
                         foreach ($s as $item) {
                             if (!array_key_exists($item, $s)) {
-                                echo $item . " ";
+                                echo "<span class='badge bg-secondary'>";
+                                echo $item;
+                                echo "</span>";
+                                echo "    ";
                                 $s[$item] = true;
                             }
                         }
