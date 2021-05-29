@@ -42,21 +42,19 @@ if (isset($id)):
             }
 
 
-
             if ($dtime->getTimestamp() > $dt->getTimestamp()):
 
                 ?>
                 <tr>
                     <td>
                         <a href="/event/view/event.php?id=<?php echo $row['id'] ?>"><?php echo $row['name']; ?></a>
-
                     </td>
                     <td><?php echo $row['date'] ?></td>
                     <td>
                         <?php echo $row['time']; ?>
                     </td>
                     <td>
-                        <?php echo $row['location'];?>
+                        <?php echo $row['location']; ?>
                     </td>
                     <td><?php echo $row['tag'] ?></td>
                     <td>
@@ -66,8 +64,6 @@ if (isset($id)):
                         $stmt2->execute([$row['id']]);
                         $s = [];
                         $index = 0;
-
-
                         while ($row2 = $stmt2->fetch()):?>
                             <?php
                             $s[$index] = $row2['tag'];

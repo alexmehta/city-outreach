@@ -20,13 +20,33 @@ public class Rest {
         System.out.println("Cleaned DB");
         parseTable(8, "https://hayward.legistar.com/Calendar.aspx");
         FileUtils.cleanDirectory(new File("src/main/tmp"));
+        //this is the worst way to do this, but it must be done to get this part over with
+        for (int i = 0; i < 10000; i++) {
+            PDFreader pdFreader = new PDFreader();
+            pdFreader.attemptZoomLink(i);
+        }
         return "Complete: inserted values";
     }
-
+    @PostMapping("/update/zoom")
+    public String getZoom(){
+        //this is the worst way to do this, but it must be done to get this part over with
+        for (int i = 0; i < 10000; i++) {
+            PDFreader pdFreader = new PDFreader();
+            pdFreader.attemptZoomLink(i);
+        }
+        return "done";
+    }
     @PostMapping("/test")
     public String testing() throws IOException, InterruptedException, SQLException, ParseException {
         GetMeetingMinutes getMeetingMinutes = new GetMeetingMinutes();
         return getMeetingMinutes.test();
+    }
+    @PostMapping("/test2")
+    public String test2(){
+        PDFreader pdFreader = new PDFreader();
+        pdFreader.attemptZoomLink(52);
+
+        return "52";
     }
 
 }

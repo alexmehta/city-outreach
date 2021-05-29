@@ -1,11 +1,10 @@
 <?php
 
-use Eluceo\iCal\Domain\Entity\Event;
-
 require "../model/Events.php";
 $event = new Events();
 $event = $event->getEvent($_GET['id']);
 session_start();
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -46,6 +45,17 @@ session_start();
         Date: <?php echo $event['date'] . " " . $event['time'] ?>
     </p>
     <p>
+        <?php
+        if (strstr($event['zoomlink'], "zoom.us")):
+            preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $event['zoomlink'], $match);
+            ?>
+
+            Zoom link: <a href="<?php echo $match[0][0]; ?>"><?php echo $match[0][0]; ?></a>
+        <?php
+        endif;
+        ?>
+    </p>
+    <p>
         Location: <?php
         echo $event['location'];
         if (!preg_match("(location|Remote|remote|REMOTE)", $event['location'])) {
@@ -82,36 +92,37 @@ session_start();
 
     <? endif; ?>
 </h4>
+
 <h1>Other items in this meeting</h1>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Tag
-            </th>
-            <th>
-                Ask a question
-            </th>
-        </tr>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Tag
+        </th>
+        <th>
+            Ask a question
+        </th>
+    </tr>
     </thead>
     <tbody>
-        <?php
-        require_once "../../includes/database.php";
-        $id = $_GET['id'];
-        $pdo = (new database())->connect();
-        $sql = "SELECT * FROM meetingminutes where event=?";
-        $sql = $pdo->prepare($sql);
-        $sql->execute([$id]);
-        //print_r($sql->fetchAll());
-            while($row = $sql->fetch()):
+    <?php
+    require_once "../../includes/database.php";
+    $id = $_GET['id'];
+    $pdo = (new database())->connect();
+    $sql = "SELECT * FROM meetingminutes where event=?";
+    $sql = $pdo->prepare($sql);
+    $sql->execute([$id]);
+    //print_r($sql->fetchAll());
+    while ($row = $sql->fetch()):
         ?>
         <tr>
             <td>
                 <?php
-                    echo $row['name'];
+                echo $row['name'];
                 ?>
             </td>
 
@@ -121,11 +132,11 @@ session_start();
                 ?>
             </td>
             <td>
-                <a href="contact.php?tagid=<?php echo $row['id'];?>&event=<?php echo $_GET['id']; ?>">Contact</a>
+                <a href="contact.php?tagid=<?php echo $row['id']; ?>&event=<?php echo $_GET['id']; ?>">Contact</a>
             </td>
 
         </tr>
-        <?php endwhile;?>
+    <?php endwhile; ?>
     </tbody>
 
 </table>
