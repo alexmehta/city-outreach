@@ -1,4 +1,7 @@
 <?php
+
+use Eluceo\iCal\Domain\Entity\Event;
+
 require "../model/Events.php";
 $event = new Events();
 $event = $event->getEvent($_GET['id']);
@@ -79,7 +82,53 @@ session_start();
 
     <? endif; ?>
 </h4>
-<h4>
-</h4>
+<h1>Other items in this meeting</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Tag
+            </th>
+            <th>
+                Ask a question
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        require_once "../../includes/database.php";
+        $id = $_GET['id'];
+        $pdo = (new database())->connect();
+        $sql = "SELECT * FROM meetingminutes where event=?";
+        $sql = $pdo->prepare($sql);
+        $sql->execute([$id]);
+        //print_r($sql->fetchAll());
+            while($row = $sql->fetch()):
+        ?>
+        <tr>
+            <td>
+                <?php
+                    echo $row['name'];
+                ?>
+            </td>
+
+            <td>
+                <?php
+                echo $row['tag'];
+                ?>
+            </td>
+            <td>
+                <a href="contact.php?tagid=<?php echo $row['id'];?>&event=<?php echo $_GET['id']; ?>">Contact</a>
+            </td>
+
+        </tr>
+        <?php endwhile;?>
+    </tbody>
+
+</table>
+
 </body>
 </html>

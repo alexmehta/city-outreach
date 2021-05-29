@@ -15,7 +15,15 @@ class Events
         $sql = $pdo->prepare($sql);
         $sql->execute([$long, $lat, $id]);
     }
-
+    function getEvents($id): array
+    {
+        require_once "../../includes/database.php";
+        $pdo = (new database())->connect();
+        $sql = "SELECT * FROM meetingminutes where event=?";
+        $sql = $pdo->prepare($sql);
+        $sql->execute([$id]);
+        return $sql->fetchAll();
+    }
     /**
      * @throws Exception
      */

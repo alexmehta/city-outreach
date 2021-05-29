@@ -39,11 +39,7 @@ if (isset($id)):
             } catch (Exception $e) {
                 //echo $e;
             }
-            if ($row['name'] == "Council Sustainability Committee") {
-                //echo $dt->getTimestamp();
-                //echo "<br>";
-                //echo $dtime->getTimestamp();
-            }
+
 
 
             if ($dtime->getTimestamp() > $dt->getTimestamp()):
@@ -78,7 +74,10 @@ if (isset($id)):
                         <?php
                         foreach ($s as $item) {
                             if (!array_key_exists($item, $s)) {
-                                echo $item . " ";
+                                echo "<span class='badge bg-secondary'>";
+                                echo $item;
+                                echo "</span>";
+                                echo "    ";
                                 $s[$item] = true;
                             }
                         }
