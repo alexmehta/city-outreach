@@ -1,6 +1,13 @@
 <?php
 $event = $_GET['event'];
 $meetingminute = $_GET['tagid'];
+echo $meetingminute;
+echo "<br>";
+require_once "../model/Events.php";
+
+$eventClass = new Events();
+$eventdetails = $eventClass->getEvent($event);
+$meetingminutes = $eventClass->getmeetinMin($meetingminute);
 ?>
 <!doctype html>
 <html lang="en">
@@ -12,6 +19,7 @@ $meetingminute = $_GET['tagid'];
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Contact</title>
 
 </head>
 <body>
@@ -24,9 +32,10 @@ $meetingminute = $_GET['tagid'];
 <h1>Send a message:</h1>
 <form class="form-control">
     <label for="event">Event</label>
-    <input id="event" type="text" disabled="disabled" name="event" value="<?php echo $event ?>">
+    <input id="event" type="text" disabled="disabled" name="event"
+           value="<?php echo $eventdetails["name"] . " meeting on " . $eventdetails["date"] ?>">
     <label for="event">Event Item</label>
-    <input id="event" type="text" disabled="disabled" name="event" value="<?php echo $meetingminute ?>">
+    <input id="event" type="text" disabled="disabled" name="event" value="<?php echo $meetingminutes["name"] ?>">
     <label for="message">Subject</label>
     <input type="text" id="subject" name="subject">
     <label for="message">Message</label>

@@ -17,6 +17,7 @@ public class EventsBackend {
     private final GetNotifications getNotifications;
     private final GetIntrestingEvents getIntrestingEvents;
     private final Service inArea;
+
     public static void main(String[] args) {
         SpringApplication.run(EventsBackend.class, args);
     }
@@ -50,6 +51,7 @@ public class EventsBackend {
             }
         }
     }
+
     //checks every 15 minutes for events to end an email about
     @Scheduled(fixedRate = 1800 * 1000)
     void checkupdates() {
@@ -57,7 +59,7 @@ public class EventsBackend {
     }
 
     @Scheduled(fixedRate = 5 * 1000)
-    //every 5 minutes
+        //every 5 minutes
     void checkingArea() {
         inArea.runService();
     }
