@@ -13,6 +13,7 @@ if (isset($id)):
             </th>
             <th>Date</th>
             <th>Time</th>
+            <th>Location</th>
             <th>main tag</th>
             <th>Other events in meeting</th>
             <th>Follow Event</th>
@@ -53,6 +54,9 @@ if (isset($id)):
                     <td><?php echo $row['date'] ?></td>
                     <td>
                         <?php echo $row['time']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['location'];?>
                     </td>
                     <td><?php echo $row['tag'] ?></td>
                     <td>
