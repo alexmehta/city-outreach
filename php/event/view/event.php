@@ -8,18 +8,6 @@ session_start();
 ?>
 <!doctype html>
 <html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-
-    <title>        <?php echo $event['name'] ?>
-    </title>
-</head>
 <body>
 
 <!-- Optional JavaScript; choose one of the two! -->
@@ -49,7 +37,6 @@ session_start();
         if (strstr($event['zoomlink'], "zoom.us")):
             preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $event['zoomlink'], $match);
             ?>
-
             Zoom link: <a href="<?php echo $match[0][0]; ?>"><?php echo $match[0][0]; ?></a>
         <?php
         endif;
@@ -61,6 +48,7 @@ session_start();
         if (!preg_match("(location|Remote|remote|REMOTE)", $event['location'])) {
             echo "<br>";
             $events = new Events();
+
             echo "<img src = ";
             try {
                 echo $events->getMap($_GET['id']);
@@ -72,6 +60,7 @@ session_start();
         ?>
     </p>
     <?php
+
     include_once "../../notifications/Notifications.php";
     $notification = new Notifications();
     if ($notification->getNotification($_GET['id'], $_SESSION['id']) == 0):
@@ -90,9 +79,23 @@ session_start();
         <td><a href="../../notifications/removeReminder.php?id=<?php echo $_GET['id']; ?>">Unfollow</a></td>
 
 
-    <? endif; ?>
-</h4>
+    <?php endif; ?>
 
+</h4>
+<h4>
+    <?php
+        if (isset($event['pdf'])&&strstr($event['pdf'],"View")):
+    ?>
+    PDF: <a href="<?php
+    $file = $event['pdf'];
+    echo "https://hayward.legistar.com/" . $file;
+    ?>">
+
+        link
+
+    </a>
+    <?php endif;?>
+</h4>
 <h1>Other items in this meeting</h1>
 <table class="table">
     <thead>
@@ -142,4 +145,16 @@ session_start();
 </table>
 
 </body>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title>        <?php echo $event['name'] ?>
+    </title>
+</head>
 </html>

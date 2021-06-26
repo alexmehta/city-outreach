@@ -1,6 +1,5 @@
 package com.hayward.spring.email.inArea;
 
-import com.hayward.spring.email.Secondemailservice;
 import lombok.AllArgsConstructor;
 
 import java.sql.*;
@@ -9,6 +8,7 @@ import java.sql.*;
 @AllArgsConstructor
 public class Service {
     private final Miles miles;
+
     public void runService() {
         Connection conn = null;
         Statement stmt = null;
@@ -24,6 +24,7 @@ public class Service {
                 user.setLongitude(resultSet.getDouble("longitude"));
                 user.setName(resultSet.getString("firstname"), resultSet.getString("lastname"));
                 user.setId(resultSet.getInt("id"));
+                user.setMiles(resultSet.getInt("miles"));
                 miles.mission(user);
             }
         } catch (Exception excep) {
