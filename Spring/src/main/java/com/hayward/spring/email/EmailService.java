@@ -37,7 +37,7 @@ public class EmailService implements EmailSender {
         helper.setText(String.format(mess, event,date),true);
 
         helper.setTo(to);
-        helper.setFrom("cyberorangelord17@gmail.com");
+        helper.setFrom("cityofhayward123@gmail.com");
         mailSender.send(message);
 
     }

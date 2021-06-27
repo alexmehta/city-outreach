@@ -21,6 +21,7 @@ class User
             $stmt->execute([$email, $userid, $firstname, $lastname, $profile]);
         }
         $this->validateGoogleUser($userid);
+        header("LOCATION: ../../index.php");
     }
 
     function googleUserExists($userid): bool

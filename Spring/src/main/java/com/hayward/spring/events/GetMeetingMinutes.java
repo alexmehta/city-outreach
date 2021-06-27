@@ -57,7 +57,7 @@ public class GetMeetingMinutes {
             conn = DriverManager.getConnection(url, "devuser", "devpass");
 //            System.out.println("Connection is created successfully:");
             stmt = conn.createStatement();
-            String query1 = "TRUNCATE TABLE meetingminutes";
+            String query1 = "DELETE FROM upcomingevents WHERE deleteable=1";
             PreparedStatement ps = conn.prepareStatement(query1, Statement.RETURN_GENERATED_KEYS);
 //            System.out.println(query1);
             ps.executeUpdate();

@@ -83,7 +83,7 @@ public class Miles {
     public void mission(User user) throws MessagingException, IOException {
         ArrayList<Event> events = getTags();
         for (Event event : events) {
-            if (checkDistance(event, user) && notSent(event.getId(), user.getId())  ) {
+            if (checkDistance(event, user) && notSent(event.getId(), user.getId())) {
                 //since this should be a notification, we will check if email has already been sent, if not, add to db then send
                 sender.send(user.getEmail(), event.getName() + " is near your location", event.getName(), event.getDate(), event.getLocation());
                 insert(user.getId(), event.getId());
@@ -92,6 +92,9 @@ public class Miles {
     }
 
     public boolean checkDistance(Event event, User user) {
+
+        System.out.println(user.getMiles() * 1609.334);
+        System.out.println(event.getLat() + " " +  event.getLongitude());
         return calculateDistanceInMeters(event.getLat(), event.getLongitude(), user.getLat(), event.getLongitude()) <= user.getMiles() * 1609.334;
     }
 
@@ -118,6 +121,8 @@ public class Miles {
                     event.setLocation(resultSet.getString("location"));
                     event.setTime(resultSet.getString("time"));
                     event.setDate(resultSet.getString("date"));
+                    event.setLat(resultSet.getDouble("lat"));
+                    event.setLongitude(resultSet.getDouble("long"));
                     events.add(event);
                 }
             }

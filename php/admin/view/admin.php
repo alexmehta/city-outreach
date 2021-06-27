@@ -3,6 +3,24 @@ require_once "loginCheck.php";
 require_once "../model/Events.php";
 $event = new Events();
 ?>
+<style>
+
+    * {
+        margin: 0
+    }
+
+    .left, .right {
+        width: 50%;
+    }
+
+    .left {
+        float: left
+    }
+
+    .right {
+        float: right
+    }
+</style>
 <!doctype html>
 <html lang="en">
 <head>
@@ -27,98 +45,13 @@ $event = new Events();
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-<div class="container">
-    <div class="row">
-        <div class="col">
-
-                <div class="">
-                    <canvas id="myChart"></canvas>
-                </div>
-        </div>
-
-        <div class="col">
-            <table class="table" id="upcoming-events">
-                <thead>
-                <tr>
-                    <th>
-                        Event
-                    </th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>main tag</th>
-                    <th>Other events in meeting</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                include "../../includes/includes.php";
-                ini_set('display_errors', 1);
-                $stmt = $pdo->query("SELECT * FROM upcomingevents");
-                while ($row = $stmt->fetch()):?>
-                    <?php
-                    $dt = new DateTime("now", new DateTimeZone('America/Phoenix'));
-                    $time = strtotime($row['date']);
-                    if ($time > strtotime($dt->format("m/d/Y, H:i:s"))):
-
-                        ?>
-
-                        <tr>
-                            <td>
-
-                                <a href="event.php?id=<?php echo $row['id'] ?>"><?php echo $row['name']; ?></a>
-
-                            </td>
-                            <td><?php echo $row['date'] ?></td>
-                            <td>
-                                <?php echo $row['time']; ?>
-                            </td>
-                            <td><?php echo $row['tag'] ?></td>
-                            <td>
-                                <?php
-                                $sql = "SELECT * FROM meetingminutes WHERE event=?";
-                                $stmt2 = $pdo->prepare($sql);
-                                $stmt2->execute([$row['id']]);
-                                $s = [];
-                                $index = 0;
-
-
-                                while ($row2 = $stmt2->fetch()):?>
-                                    <?php
-                                    $s[$index] = $row2['tag'];
-                                    $index++;
-                                    ?>
-
-                                <?php endwhile; ?>
-                                <?php
-                                foreach ($s as $item) {
-                                    if (!array_key_exists($item, $s)) {
-                                        echo $item . " ";
-                                        $s[$item] = true;
-                                    }
-                                }
-
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                require "model.php";
-                                ?>
-                            </td>
-                        </tr>
-                    <?php endif ?>
-                <?php endwhile; ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-
+<div class="left">
+    <canvas id="myChart">
+    </canvas>
 </div>
-
 <script>
     const data = {
         labels: <?php echo $event->getsOfTags();?>
-
         ,
         datasets: [{
             label: 'Events most intrested in',
@@ -131,7 +64,7 @@ $event = new Events();
                 'rgb(54, 162, 235)',
                 'rgb(255, 205, 86)'
             ],
-            hoverOffset: 4
+            hoverOffset: 2
         }]
     };
     const config = {
@@ -142,6 +75,139 @@ $event = new Events();
 
     const chart = new Chart(document.getElementById("myChart"), config);
 </script>
+<div class="right">
+    <table class="table" id="upcoming-events">
+        <thead>
+        <tr>
+            <th>
+                Event
+            </th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>main tag</th>
+            <th>Other events in meeting</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        include "../../includes/includes.php";
+        ini_set('display_errors', 1);
+        $stmt = $pdo->query("SELECT * FROM upcomingevents");
+        while ($row = $stmt->fetch()):?>
+            <?php
+            $dt = new DateTime("now", new DateTimeZone('America/Phoenix'));
+            $time = strtotime($row['date']);
+            if ($time > strtotime($dt->format("m/d/Y, H:i:s"))):
+
+                ?>
+
+                <tr>
+                    <td>
+
+                        <a href="../../event/view/event.php?id=<?php echo $row['id'] ?>"><?php echo $row['name']; ?></a>
+
+                    </td>
+                    <td><?php echo $row['date'] ?></td>
+                    <td>
+                        <?php echo $row['time']; ?>
+                    </td>
+                    <td><?php echo $row['tag'] ?></td>
+                    <td>
+                        <?php
+                        $sql = "SELECT * FROM meetingminutes WHERE event=?";
+                        $stmt2 = $pdo->prepare($sql);
+                        $stmt2->execute([$row['id']]);
+                        $s = [];
+                        $index = 0;
+
+
+                        while ($row2 = $stmt2->fetch()):?>
+                            <?php
+                            $s[$index] = $row2['tag'];
+                            $index++;
+                            ?>
+
+                        <?php endwhile; ?>
+                        <?php
+                        foreach ($s as $item) {
+                            if (!array_key_exists($item, $s)) {
+                                echo $item . " ";
+                                $s[$item] = true;
+                            }
+                        }
+
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        require "model.php";
+                        ?>
+                    </td>
+                </tr>
+            <?php endif ?>
+        <?php endwhile; ?>
+        </tbody>
+    </table>
+    <div id="inbox" class="">
+        <h1>Inbox</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>Event</th>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Reply:</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+
+            require_once "../model/Admin.php";
+            $admin = new Admin();
+            include "../../includes/includes.php";
+            $sql = "SELECT * FROM messages where `read`=0";
+            $sql = $pdo->prepare($sql);
+            $sql->execute([]);
+            //rint_r($sql->fetchAll());
+
+            while ($row = $sql->fetch()):
+
+                ?>
+                <tr>
+                    <td>
+                        <?php
+
+                        $sql2 = "SELECT * FROM users where id=?";
+                        $sql2 = $pdo->prepare($sql2);
+                        $sql2->execute([$row['user']]);
+
+                        $s = $sql2->fetch();
+                        echo $s["firstname"]; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['event']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['subject'] ?>
+                    </td>
+                    <td>
+                        <?php echo $row['message']; ?>
+                    </td>
+                    <td>
+                        <a href="mailto:<?php echo $s['email']; ?>" target="_blank" class="btn btn-primary">Email</a>
+                    </td>
+
+                </tr>
+            <?php endwhile; ?>
+            </tbody>
+
+        </table>
+
+    </div>
+    <div>
 
 
 </body>

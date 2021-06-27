@@ -1,11 +1,9 @@
 <?php
 if (isset($id)):
-
-
     ?>
-
-
-    <table class="table" id="upcoming-events">
+    <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+    <table class="table" data-toggle="table" data-search="true" data-show-columns="true" id="upcoming-events">
         <thead>
         <tr>
             <th>

@@ -36,7 +36,9 @@ public class ClassificationRunner {
                 "Energy",
                 "Green Energy",
                 "Solar Panels",
-                "Pre-K"
+                "Pre-K",
+                "Housing",
+                "Personnel Commission"
         };
         String[] tags = new String[]{
                 "Infrastructure",
@@ -55,8 +57,9 @@ public class ClassificationRunner {
                 "Green Energy",
                 "Green Energy",
                 "Green Energy",
-                "Childcare"
-
+                "Childcare",
+                "Homelessness",
+                "General Meeting"
         };
 
         for (int i = 0; i < (tags.length + example.length) / 2; i++) {

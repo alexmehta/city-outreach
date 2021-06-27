@@ -17,12 +17,13 @@ public class EventsBackend {
     private final GetNotifications getNotifications;
     private final GetIntrestingEvents getIntrestingEvents;
     private final Service inArea;
+
     public static void main(String[] args) {
         SpringApplication.run(EventsBackend.class, args);
     }
 
     //real time once per week for intresting events
-    //@Scheduled(fixedRate = 604800 * 1000)
+    @Scheduled(fixedRate = 604800 * 1000)
     void sendEmails() {
         Connection conn = null;
         Statement stmt = null;
@@ -50,18 +51,20 @@ public class EventsBackend {
             }
         }
     }
+
     //checks every 15 minutes for events to end an email about
-    //@Scheduled(fixedRate = 1800 * 1000)
+    @Scheduled(fixedRate = 1800 * 1000)
     void checkupdates() {
         getNotifications.getEvents();
     }
 
-    //@Scheduled(fixedRate = 5 * 1000)
-    void test() {
+    @Scheduled(fixedRate = 5 * 1000)
+        //every 5 minutes
+    void checkingArea() {
         inArea.runService();
     }
 
-    //@EnableScheduling
+    @EnableScheduling
     class SchedulingConfiguration {
 
     }
