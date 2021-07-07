@@ -1,12 +1,8 @@
 package com.hayward.spring.email;
 
 import com.hayward.spring.email.updates.EmailUpdateSender;
-import com.hayward.spring.email.updates.Event;
 import lombok.AllArgsConstructor;
 import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -16,8 +12,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.io.IOException;
-import java.sql.*;
-import java.util.ArrayList;
 
 @Service
 @AllArgsConstructor

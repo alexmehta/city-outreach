@@ -11,9 +11,10 @@ import java.text.ParseException;
 
 import static com.hayward.spring.events.GetMeetingMinutes.cleanDB;
 import static com.hayward.spring.events.GetMeetingMinutes.parseTable;
-
+//rest controller
 @RestController
 public class Rest {
+    //clean database by trunication, get calendar, parse all of the events and
     @PostMapping("/update")
     public String getvalues() throws IOException, InterruptedException, SQLException, ParseException {
         cleanDB();
@@ -30,6 +31,7 @@ public class Rest {
     @PostMapping("/update/zoom")
     public String getZoom(){
         //this is the worst way to do this, but it must be done to get this part over with
+        //what it ends up having to do is parsing every id up to 10000, in the future, it is better to do this in any other way
         for (int i = 0; i < 10000; i++) {
             PDFreader pdFreader = new PDFreader();
             pdFreader.attemptZoomLink(i);

@@ -1,5 +1,6 @@
 package com.hayward.spring.email.updates;
 import com.hayward.spring.email.Secondemailservice;
+import com.hayward.spring.email.LocationBased.Event;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;

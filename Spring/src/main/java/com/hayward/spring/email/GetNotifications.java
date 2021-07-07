@@ -117,8 +117,7 @@ public class GetNotifications {
     }
     public void SendEmail(int event, String email, int id) throws MessagingException, SQLException, IOException {
         String reminder = String.format("Reminder that %s is happening on %s", getEventName(event), getEventDate(event));
-        String to = email;
-        emailSender.send(to, reminder,getEventName(event),getEventDate(event));
+        emailSender.send(email, reminder,getEventName(event),getEventDate(event));
 
         Connection conn = null;
         Statement stmt = null;

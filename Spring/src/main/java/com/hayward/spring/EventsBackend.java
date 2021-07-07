@@ -1,7 +1,7 @@
 package com.hayward.spring;
 
 import com.hayward.spring.email.GetNotifications;
-import com.hayward.spring.email.inArea.Service;
+import com.hayward.spring.email.LocationBased.Service;
 import com.hayward.spring.email.updates.GetIntrestingEvents;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.SpringApplication;
