@@ -5,7 +5,7 @@ import de.daslaboratorium.machinelearning.classifier.bayes.BayesClassifier;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
+//using Bayes Classifier, load some examples and use it when parsing the meeting minutes and details
 public class ClassificationRunner {
     public static final Classifier<String, String> bayes =
             new BayesClassifier<String, String>();
@@ -20,6 +20,7 @@ public class ClassificationRunner {
     }
 
     static void add() {
+
         String[] example = new String[]{
                 "Council Infrastructure Committee",
                 "Hayward Youth Commission", "Hayward Library Commission",

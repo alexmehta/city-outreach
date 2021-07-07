@@ -82,7 +82,7 @@ public class GetMeetingMinutes {
 
     }
 
-    //todo: deal with duplicates
+
     static void getTable(String url) throws InterruptedException, IOException {
         //downloads table and renames to info.html
         //get excel doc
@@ -129,7 +129,7 @@ public class GetMeetingMinutes {
             System.out.println("problem: file not found");
         }
     }
-
+    //insert data into table
     static int insertData(String name, String date, String time, String location, String urls, String pdf) throws IOException, ParseException {
         SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         int id = 0;
@@ -325,7 +325,7 @@ public class GetMeetingMinutes {
             }
         }
     }
-
+    //goes through table and gets all events
     public static void parseTable(int num, String url) throws IOException, InterruptedException, ParseException, SQLException {
         Document doc = Jsoup.connect(url).get();
         Element table = doc.getElementById("ctl00_ContentPlaceHolder1_gridCalendar_ctl00");
@@ -352,8 +352,10 @@ public class GetMeetingMinutes {
 //                    System.out.println(url);
                     if (atag.attr("href").equals("") || !atag.attr("href").startsWith("MeetingDetail")) {
 //                        //  System.out.println("no adj, defaulting to inserting regularly");
+                        //inserts event if no meeting minutes
                         insertEventNOTNULL(columns.get(0).text(), columns.get(1).text(), columns.get(3).text(), columns.get(4).text());
                     } else {
+                        //simulates click of the meeting minutes
                         click(atag.attr("href"));
 
                     }

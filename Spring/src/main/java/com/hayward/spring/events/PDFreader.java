@@ -1,5 +1,5 @@
 package com.hayward.spring.events;
-
+//the point of this class is to find pdf files and get the zoom link with hayward.zoom.us
 import org.apache.commons.io.FileUtils;
 import org.apache.pdfbox.io.IOUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -78,7 +78,7 @@ public class PDFreader {
         return "";
     }
 
-    //update the sql row
+    //update the sql row for zoom link
     public static void Update(String url, int id) {
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cityofhayward", "devuser", "devpass");
 

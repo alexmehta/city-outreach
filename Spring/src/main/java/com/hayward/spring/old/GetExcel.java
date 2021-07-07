@@ -1,6 +1,7 @@
 package com.hayward.spring.old;
 
 import org.apache.commons.io.FileUtils;
+import org.jetbrains.annotations.ApiStatus;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -23,6 +24,8 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class GetExcel {
+    @Deprecated
+    @ApiStatus.ScheduledForRemoval()
     public static void main(String[] args) throws InterruptedException, IOException, SQLException {
         FileUtils.cleanDirectory(new File("src/main/tmp"));
         GetExcel getExcel1 = new GetExcel();
@@ -31,7 +34,8 @@ public class GetExcel {
         ReaderClass reader = new ReaderClass();
         int f = reader.RW(new File("src\\main\\tmp\\File.txt"));
     }
-
+    @Deprecated
+    @ApiStatus.ScheduledForRemoval()
     public static void santaize() throws IOException {
         String name = "src/main/tmp/File.txt";
         List<String> lines = FileUtils.readLines(new File(name));
@@ -39,7 +43,8 @@ public class GetExcel {
         FileUtils.writeLines(new File(name), lines);
         FileUtils.forceDelete(new File("src/main/tmp/Export.html"));
     }
-
+    @Deprecated
+    @ApiStatus.ScheduledForRemoval()
     public void readInCSVFormat(File file) throws IOException {
         PrintWriter fout = new PrintWriter("src/main/tmp/File.txt");
         Document doc = Jsoup.parse(file, null);
@@ -60,7 +65,8 @@ public class GetExcel {
         santaize();
 
     }
-
+    @Deprecated
+    @ApiStatus.ScheduledForRemoval()
     public void DownloadXLS() throws InterruptedException {
         //https://hayward.legistar.com/Calendar.aspx
         //get excel doc
